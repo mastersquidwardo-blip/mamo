@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MAMO · GMR depletion &amp; chasability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#0b0a09; --bg2:#12100e; --bg3:#1a1714; --line:#2a241c;
+      --ink:#e8e0d4; --muted:#9a8f7c; --dim:#6e6558;
+      --gold:#d4b45a; --stone:#7d8a96; --ember:#c45c3a;
+      --ok:#7a9a6a; --blue:#6b8fbf; --warn:#c45c3a;
+      --A:#7a9a6a; --B:#d4b45a; --C:#c9a227; --D:#c45c3a; --E:#8a6a5a;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html,body { background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans",system-ui,sans-serif; }
+    .wrap { max-width:1280px; margin:0 auto; padding:24px 20px 72px; }
+    .kicker { font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+    h1 { font-size:26px; font-weight:600; letter-spacing:-.03em; margin:8px 0 10px; line-height:1.2; }
+    h1 span { color:var(--muted); font-weight:400; }
+    .sub { color:var(--muted); font-size:14px; line-height:1.55; max-width:90ch; }
+    .tabs { display:flex; gap:6px; margin:22px 0 16px; flex-wrap:wrap; }
+    .tabs button {
+      background:var(--bg3); color:var(--muted); border:1px solid var(--line);
+      padding:7px 12px; border-radius:999px; cursor:pointer; font:inherit; font-size:13px;
+    }
+    .tabs button.on { background:#2a2410; color:var(--gold); border-color:#5a4a22; }
+    .panel { display:none; }
+    .panel.on { display:block; }
+    .grid { display:grid; gap:12px; }
+    .hero { grid-template-columns:repeat(4,1fr); }
+    .card { background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+    .card h2, .card h3 {
+      font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--dim); margin-bottom:8px; font-weight:500;
+    }
+    .val { font-size:22px; font-weight:600; letter-spacing:-.03em; }
+    .val em { font-style:normal; color:var(--gold); }
+    .ci { font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--dim); margin-top:4px; }
+    .grade {
+      display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px;
+      padding:1px 6px; border-radius:4px; margin-left:6px; vertical-align:middle;
+    }
+    .gA { background:#1c2a1a; color:var(--A); } .gB { background:#2a2410; color:var(--B); }
+    .gC { background:#2a220e; color:var(--C); } .gD { background:#2a1610; color:var(--D); }
+    .gE { background:#241816; color:var(--E); }
+    .north { grid-column:1/-1; display:grid; grid-template-columns:1.4fr 1fr; gap:16px; align-items:center; }
+    .north .val { font-size:36px; }
+    .warns { background:#1a100e; border-color:#5a3028; }
+    .warns li { margin:6px 0 6px 16px; color:#e0b8a8; font-size:13px; line-height:1.45; }
+    .ctrl { display:grid; gap:6px; font-size:12px; color:var(--muted); }
+    .ctrl strong { color:var(--ink); font-size:13px; }
+    input[type=range] { width:100%; accent-color:var(--gold); }
+    input[type=number], select {
+      background:var(--bg3); color:var(--ink); border:1px solid var(--line);
+      border-radius:6px; padding:6px 8px; font-family:"IBM Plex Mono",monospace; font-size:12px;
+    }
+    .seg { display:flex; gap:6px; flex-wrap:wrap; }
+    .chip {
+      background:var(--bg3); color:var(--muted); border:1px solid var(--line);
+      border-radius:999px; padding:5px 10px; font:inherit; font-size:12px; cursor:pointer;
+    }
+    .chip.on { background:#2a2410; color:var(--gold); border-color:#5a4a22; }
+    .chart { width:100%; height:280px; display:block; }
+    .chart-lg { height:340px; }
+    .legend { display:flex; gap:12px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin:6px 0 8px; }
+    .sw { display:inline-block; width:14px; height:2px; margin-right:5px; vertical-align:middle; }
+    .swb { display:inline-block; width:9px; height:9px; margin-right:5px; vertical-align:middle; border-radius:2px; }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th,td { text-align:left; padding:6px; border-bottom:1px solid var(--line); }
+    th { font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--dim); font-weight:500; }
+    td.n { font-family:"IBM Plex Mono",monospace; text-align:right; }
+    .prose { font-size:13.5px; line-height:1.6; color:var(--muted); }
+    .prose p+p { margin-top:10px; } .prose strong { color:var(--ink); }
+    .formula { font-family:"IBM Plex Mono",monospace; font-size:11px; line-height:1.65; background:#0e0c0a; border:1px solid var(--line); border-radius:6px; padding:10px 12px; color:#c9b896; margin-top:8px; }
+    .bar { display:flex; height:16px; border-radius:4px; overflow:hidden; background:#0e0c0a; }
+    .bar i { display:block; height:100%; }
+    .two { grid-template-columns:1.15fr .85fr; }
+    .three { grid-template-columns:1fr 1fr 1fr; }
+    .foot { margin-top:20px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--dim); line-height:1.5; }
+    .mind li { margin:6px 0 6px 16px; font-size:13px; color:var(--muted); }
+    @media (max-width:980px) {
+      .hero,.north,.two,.three { grid-template-columns:1fr; }
+      .north .val { font-size:28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="kicker">Magnificent Monsters · Americas · probabilistic depletion</div>
+    <h1>How many GMRs are still in sealed boxes, <span>and how chasable is what remains?</span></h1>
+    <p class="sub">
+      Print run <strong>R is inferred</strong>, not assumed. 180k is not a fact. Density of remaining sealed is not automatically worse because packs were opened.
+      Grades: <span class="grade gA">A official</span> <span class="grade gB">B observed</span> <span class="grade gC">C inferred</span> <span class="grade gD">D behavioral</span> <span class="grade gE">E speculative</span>
+    </p>
+
+    <div class="tabs" id="tabs">
+      <button class="on" data-p="overview">Overview</button>
+      <button data-p="inference">Print inference</button>
+      <button data-p="depletion">Depletion &amp; states</button>
+      <button data-p="chase">Chase pressure</button>
+      <button data-p="evidence">Evidence &amp; mind-changers</button>
+    </div>
+
+    <div id="warns"></div>
+
+    <!-- OVERVIEW -->
+    <div class="panel on" id="p-overview">
+      <div class="grid hero" id="hero"></div>
+      <div class="card north" style="margin-top:12px" id="north"></div>
+      <div class="grid two" style="margin-top:12px">
+        <div class="card">
+          <h2>Remaining GMR density vs remaining GMR count</h2>
+          <p class="ci" style="margin-bottom:8px">If ripping is random, opening half the print leaves ~half the GMRs in the remaining half. Density stays ~1800/R. Count falls. These are different questions.</p>
+          <svg class="chart" id="chartDensity" viewBox="0 0 1000 280"></svg>
+        </div>
+        <div class="card">
+          <h2>Where remaining sealed GMRs probably sit</h2>
+          <div id="where"></div>
+          <p class="ci" style="margin-top:10px">Random seeding unless collation evidence says otherwise. Closet is not terminal — it can unlock if chase pressure rises.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFERENCE -->
+    <div class="panel" id="p-inference">
+      <div class="grid three" style="margin-bottom:12px">
+        <label class="ctrl card">
+          <strong>GMR collation</strong>
+          <div class="seg" id="collation">
+            <button class="chip on" data-v="max1">Max 1 / box</button>
+            <button class="chip" data-v="slots">Independent slots</button>
+          </div>
+          <span>3 Pool-A slots/box. Max-1 is unproven. Slot model: P(any)=1-(1-1800/(3R))³</span>
+        </label>
+        <label class="ctrl card">
+          <strong>Likelihood</strong>
+          <div class="seg" id="liketype">
+            <button class="chip on" data-v="bb">Beta-binomial</button>
+            <button class="chip" data-v="bin">IID binomial</button>
+          </div>
+          <span>Case clustering → overdispersed. IID assumes every box is independent.</span>
+        </label>
+        <label class="ctrl card">
+          <strong>US share of Americas print · <span id="usLab">75%</span></strong>
+          <input id="usShare" type="range" min="55" max="90" value="75" />
+          <span>Does not change p=f(R) if seeding is random. Changes opening extrapolation and location split. <span class="grade gE">E</span></span>
+        </label>
+      </div>
+      <div class="card">
+        <h2>Posterior of Americas mini-box print R · log-uniform prior 100k–600k</h2>
+        <svg class="chart chart-lg" id="chartPost" viewBox="0 0 1000 340"></svg>
+        <div class="legend">
+          <span><i class="sw" style="background:#d4b45a"></i>Posterior</span>
+          <span><i class="sw" style="background:#e8e0d4;opacity:.4"></i>Prior</span>
+          <span><i class="sw" style="background:#6b8fbf"></i>Median</span>
+        </div>
+        <p class="ci" id="postNote"></p>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h2>Opening samples in the likelihood · toggle to update R</h2>
+        <table id="samples"></table>
+        <p class="ci">Public GMR tweets without a denominator are <strong>not</strong> in this likelihood. They belong on Evidence. A 40-box case with 0 GMRs is worth more than a viral Dark Magician photo.</p>
+      </div>
+    </div>
+
+    <!-- DEPLETION -->
+    <div class="panel" id="p-depletion">
+      <div class="grid three" style="margin-bottom:12px">
+        <label class="ctrl card">
+          <strong>Opening path</strong>
+          <div class="seg" id="openPath">
+            <button class="chip" data-v="conservative">Conservative</button>
+            <button class="chip on" data-v="base">Base</button>
+            <button class="chip" data-v="aggressive">Aggressive</button>
+          </div>
+          <span>Independent of R. Sales ≠ openings. <span class="grade gD">D</span></span>
+        </label>
+        <label class="ctrl card">
+          <strong>Day · <span id="dayLab">2</span> (today)</strong>
+          <input id="day" type="range" min="0" max="90" value="2" />
+          <span>Day 0 = OTS 2 Sep 2026. Today = day 2.</span>
+        </label>
+        <label class="ctrl card">
+          <strong>Closet target · <span id="clLab">12%</span> of remaining sealed</strong>
+          <input id="closet" type="range" min="2" max="30" value="12" />
+          <span>Can unlock if chase pressure &gt; 1. Not NRF shrink. <span class="grade gD">D</span></span>
+        </label>
+      </div>
+      <div class="card">
+        <h2>Box states over 90 days</h2>
+        <div class="legend">
+          <span><i class="swb" style="background:#3d4a3a"></i>Channel</span>
+          <span><i class="swb" style="background:#7d8a96"></i>Consumer unopened</span>
+          <span><i class="swb" style="background:#6b8fbf"></i>Closet</span>
+          <span><i class="swb" style="background:#d4b45a"></i>Opened</span>
+          <span><i class="swb" style="background:#5c5348"></i>Physically destroyed</span>
+        </div>
+        <svg class="chart chart-lg" id="chartState" viewBox="0 0 1000 340"></svg>
+      </div>
+      <div class="grid two" style="margin-top:12px">
+        <div class="card">
+          <h2>State snapshot at selected day</h2>
+          <table id="stateTable"></table>
+        </div>
+        <div class="card prose">
+          <h3>Why “shrink” is not in the rip formula</h3>
+          <p>NRF 1.6% is <strong>retail sales-value loss</strong>, FY2022, last official number. A stolen Walmart box is usually opened. A crushed box is usually discounted and opened. That is untracked opening, not disappearance.</p>
+          <p><strong>Physical destruction</strong> (fire, water, landfill) is the only terminal loss of units. Default <strong>0.25%</strong> of print <span class="grade gE">E</span>. Accounting shrink is tracked separately and does not shrink the GMR denominator.</p>
+          <div class="formula">
+            PRINT → CHANNEL → CONSUMER_UNOPENED ⇄ CLOSET<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↘ OPENED<br>
+            PHYS_DESTROYED is a tiny side exit from channel/unopened.
+          </div>
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHASE -->
+    <div class="panel" id="p-chase">
+      <div class="grid three" style="margin-bottom:12px">
+        <label class="ctrl card">
+          <strong>Sealed mini-box price · $<span id="pxLab">35</span></strong>
+          <input id="boxPx" type="range" min="20" max="120" value="35" />
+          <span>TCGPlayer ~$32–41 on 3–4 Sep. MSRP $34.99. <span class="grade gB">B</span></span>
+        </label>
+        <label class="ctrl card">
+          <strong>GMR value preset</strong>
+          <div class="seg" id="ladder">
+            <button class="chip" data-v="none">No English solds = $0</button>
+            <button class="chip on" data-v="disc">Discovery placeholders</button>
+            <button class="chip" data-v="hot">Trophy tape</button>
+          </div>
+          <span>Asks are not solds. Placeholders are <span class="grade gE">E</span>.</span>
+        </label>
+        <label class="ctrl card">
+          <strong>Sell friction · <span id="frLab">18%</span></strong>
+          <input id="friction" type="range" min="5" max="35" value="18" />
+          <span>Fees, time, condition. Applied to GMR EV only.</span>
+        </label>
+      </div>
+      <div class="grid two">
+        <div class="card" id="chaseCard"></div>
+        <div class="card">
+          <h2>Placeholder GMR ladder · not English solds</h2>
+          <table id="ladderTable"></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVIDENCE -->
+    <div class="panel" id="p-evidence">
+      <div class="grid two">
+        <div class="card prose">
+          <h2>What would change our mind</h2>
+          <ol class="mind">
+            <li><strong>500+ documented mini-box openings with GMR count</strong> — collapses the R interval more than any tweet.</li>
+            <li><strong>Several full 40-box case breaks</strong> — tests clustering / overdispersion.</li>
+            <li><strong>Confirmed collation</strong> — max-1 vs independent slots. Switch is already in Inference.</li>
+            <li><strong>Deduplicated Americas serial registry</strong> — public hits become usable (with a reporting model).</li>
+            <li><strong>Walmart / LGS sell-through</strong> — sales ≠ openings, but they bound consumer-unopened.</li>
+            <li><strong>First trustworthy English GMR sold ladder</strong> — Chase Pressure leaves grade E.</li>
+            <li><strong>Reprint / second allocation evidence</strong> — would break the closed 1,800 identity for remaining density.</li>
+          </ol>
+        </div>
+        <div class="card prose">
+          <h2>Known unknowns · preserved from the research log</h2>
+          <p>No Konami print run, allocation, or GMR ratio. No Whatnot/LGS/Walmart rip ledger. No counted OTS census (45-page PDF only). No English TCG GMR solds — asks exist, tape does not. No pack-code decoder. “Case” on YGO Twitter is 10 or 40. OCG “6,000 boxes per name” is hearsay on a different SKU. NRF shrink is sales value, not TCG units. Clone-cohort holder counts are illustrations.</p>
+          <p>US TCGPlayer/Walmart evidence is not the full Americas denominator. E-suffix GMRs are a separate 1,800 and are excluded from R inference.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h2>Hard facts vs observations vs model</h2>
+        <table>
+          <tr><th>Item</th><th>Value</th><th>Grade</th></tr>
+          <tr><td>Americas GMR count</td><td class="n">1,800 (18 × 100)</td><td><span class="grade gA">A</span></td></tr>
+          <tr><td>Europe-distributed GMR count</td><td class="n">1,800 (E suffix)</td><td><span class="grade gA">A</span></td></tr>
+          <tr><td>Pool A slots per mini-box</td><td class="n">3</td><td><span class="grade gA">A</span></td></tr>
+          <tr><td>MSRP</td><td class="n">$34.99</td><td><span class="grade gA">A</span></td></tr>
+          <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays ≈ 17,879</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>TCGPlayer box market ~3–4 Sep</td><td class="n">$32–41 (June high ~$123)</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>Public Dark Magician GMR sightings</td><td class="n">≥2 (049/100 + one more)</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>Whatnot OTS-night GMRs</td><td class="n">4 claimed / denominator ~400–600</td><td><span class="grade gC">C</span></td></tr>
+          <tr><td>72h Americas boxes opened</td><td class="n">4k–8k, base 5.5k (content/OTS sensors)</td><td><span class="grade gD">D</span></td></tr>
+          <tr><td>Physical destruction rate</td><td class="n">0.25% of print</td><td><span class="grade gE">E</span></td></tr>
+        </table>
+      </div>
+      <div class="card prose" style="margin-top:12px">
+        <h2>Sensitivity · what moves the conclusion</h2>
+        <p>Largest effects on remaining-chasability (GMRs per 10k accessible sealed): <strong>R posterior</strong> (sample n,k), then <strong>collation</strong> (small at these R), then <strong>closet share</strong> (changes accessible count, not density if random), then <strong>observed hits ≠ expected</strong> (the only thing that changes remaining density without changing R). Opening more boxes at the expected rate does <strong>not</strong> make leftover boxes colder.</p>
+      </div>
+    </div>
+
+    <p class="foot">
+      Not investment advice. Americas only unless tagged. E-suffix excluded from R. Model date 4 Sep 2026.
+      Rebuild of the 180k-as-input dashboard. Prior: log-uniform 100k–600k.
+    </p>
+  </div>
+
+  <script>
+    const GMRS = 1800, COPIES = 100, SLOTS = 3, TODAY0 = 2, HORIZON = 90;
+    const RMIN = 100000, RMAX = 600000, RSTEP = 5000;
+    const R_GRID = [];
+    for (let r = RMIN; r <= RMAX; r += RSTEP) R_GRID.push(r);
+
+    const CARDS = [
+      { name: "Dark Magician, Pharaoh's Servant", tier: "trophy" },
+      { name: "Dark Magical Curtain", tier: "trophy" },
+      { name: "Stardust Dragon - Victim Sanctuary", tier: "trophy" },
+      { name: "Number 39: Utopia, Emissary of Light", tier: "mid" },
+      { name: "Odd-Eyes Pendulum Dragon", tier: "mid" },
+      { name: "Kuriboh - Multiply!", tier: "mid" },
+      { name: "Favorite HERO Flame Wingman", tier: "mid" },
+      { name: "Favorite HERO Shining Flare Wingman", tier: "mid" },
+      { name: "Decode Talker Integration", tier: "junk" },
+      { name: "Winged Kuriboh Sabatiel LV10", tier: "junk" },
+      { name: "Starjunk Synchron", tier: "junk" },
+      { name: "Synchro Emergency", tier: "junk" },
+      { name: "Gagaga Magician - Gagaga Magic", tier: "junk" },
+      { name: "Gagaga Girl - Cell Phone Subtraction", tier: "junk" },
+      { name: "Horoscope Sorcerer", tier: "junk" },
+      { name: "Astrograph Sorcerer", tier: "junk" },
+      { name: "Cyberse Code Magician", tier: "junk" },
+      { name: "Cyberse Contract Witch", tier: "junk" }
+    ];
+    const LADDERS = {
+      none: { trophy: 0, mid: 0, junk: 0 },
+      disc: { trophy: 8000, mid: 2500, junk: 1500 },
+      hot:  { trophy: 18000, mid: 4000, junk: 2000 }
+    };
+    const EV_NORMAL = 12;
+
+    const SAMPLES = [
+      { id: "content", on: true, n: 550, k: 4, region: "US", grade: "C", overdisp: true,
+        note: "OTS-week content/Whatnot: ~4 GMRs vs ~550 documented boxes. Weak denominator." },
+      { id: "hunt50", on: false, n: 50, k: 0, region: "US", grade: "B", overdisp: false,
+        note: "50-box hunt video. Enable if confirmed zero GMRs." },
+      { id: "infer72", on: false, n: 5500, k: 30, region: "US", grade: "D", overdisp: true,
+        note: "Circular: 72h opened was itself inferred. Off by default. Do not use as if observed." }
+    ];
+
+    const OPEN = {
+      conservative: [[0,0],[1,1400],[2,2800],[3,3200],[7,8000],[14,15000],[21,20000],[30,28000],[45,36000],[60,45000],[90,56000]],
+      base: [[0,0],[1,2200],[2,4200],[3,5500],[7,14000],[14,28000],[21,40000],[30,58000],[45,76000],[60,92000],[90,118000]],
+      aggressive: [[0,0],[1,3500],[2,6500],[3,9000],[7,28000],[14,52000],[21,72000],[30,98000],[45,120000],[60,138000],[90,158000]]
+    };
+
+    const state = {
+      coll: "max1", like: "bb", usShare: 0.75,
+      openPath: "base", day: TODAY0, closet: 0.12,
+      boxPx: 35, ladder: "disc", friction: 0.18,
+      physD: 0.0025
+    };
+
+    function lerp(a,b,t){ return a+(b-a)*t; }
+    function smooth(u){ return u*u*(3-2*u); }
+    function interp(pts,t){
+      if (t<=pts[0][0]) return pts[0][1]*(t/Math.max(pts[0][0],1e-9));
+      for (let i=1;i<pts.length;i++) if (t<=pts[i][0]) {
+        const u=(t-pts[i-1][0])/(pts[i][0]-pts[i-1][0]);
+        return lerp(pts[i-1][1], pts[i][1], smooth(u));
+      }
+      return pts[pts.length-1][1];
+    }
+    function fmt(n){ if (!isFinite(n)) return "—"; if (Math.abs(n)>=1e6) return (n/1e6).toFixed(2)+"M"; return Math.round(n).toLocaleString("en-US"); }
+    function pct(n,d){ if (!isFinite(n)) return "—"; return (n*100).toFixed(d==null?1:d)+"%"; }
+    function money(n){ return "$"+Math.round(n).toLocaleString("en-US"); }
+
+    function logGamma(z){
+      const p=[676.5203681218851,-1259.1392167224028,771.32342877765313,-176.61502916214059,12.507343278686905,-0.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];
+      if (z<0.5) return Math.log(Math.PI)-Math.log(Math.sin(Math.PI*z))-logGamma(1-z);
+      z-=1; let x=0.99999999999980993;
+      for (let i=0;i<p.length;i++) x+=p[i]/(z+i+1);
+      const t=z+p.length-0.5;
+      return 0.5*Math.log(2*Math.PI)+(z+0.5)*Math.log(t)-t+Math.log(x);
+    }
+    function logChoose(n,k){ if (k<0||k>n) return -Infinity; return logGamma(n+1)-logGamma(k+1)-logGamma(n-k+1); }
+    function logBeta(a,b){ return logGamma(a)+logGamma(b)-logGamma(a+b); }
+    function logBin(k,n,p){
+      p=Math.min(1-1e-12, Math.max(1e-12,p));
+      return logChoose(n,k)+k*Math.log(p)+(n-k)*Math.log(1-p);
+    }
+    function logBB(k,n,p,phi){
+      p=Math.min(1-1e-9, Math.max(1e-9,p));
+      const a=p*phi, b=(1-p)*phi;
+      return logChoose(n,k)+logBeta(k+a,n-k+b)-logBeta(a,b);
+    }
+
+    function pAny(R, coll){
+      if (coll==="max1") return Math.min(1, GMRS/R);
+      const g=GMRS/(SLOTS*R);
+      return 1-Math.pow(1-g, SLOTS);
+    }
+    function pName(R, coll){
+      if (coll==="max1") return Math.min(1, COPIES/R);
+      const g=COPIES/(SLOTS*R);
+      return 1-Math.pow(1-g, SLOTS);
+    }
+    function eGmrPerBox(R){ return GMRS/R; }
+
+    function posterior(){
+      const active=SAMPLES.filter(s=>s.on);
+      const logp=R_GRID.map(R=>{
+        let lp=-Math.log(R);
+        for (const s of active){
+          const p=pAny(R, state.coll);
+          lp += (state.like==="bb" || s.overdisp) ? logBB(s.k,s.n,p,24) : logBin(s.k,s.n,p);
+        }
+        return lp;
+      });
+      const m=Math.max(...logp);
+      let w=logp.map(x=>Math.exp(x-m));
+      const z=w.reduce((a,b)=>a+b,0);
+      w=w.map(x=>x/z);
+      const cdf=[]; let acc=0;
+      for (const x of w){ acc+=x; cdf.push(acc); }
+      const q=a=>{
+        for (let i=0;i<cdf.length;i++) if (cdf[i]>=a) return R_GRID[i];
+        return R_GRID[R_GRID.length-1];
+      };
+      const mean=R_GRID.reduce((s,R,i)=>s+R*w[i],0);
+      return { w, cdf, median:q(0.5), q10:q(0.1), q90:q(0.9), q025:q(0.025), q975:q(0.975), mean };
+    }
+
+    function openedAt(t){ return interp(OPEN[state.openPath], t); }
+
+    function values(){
+      const L=LADDERS[state.ladder];
+      return CARDS.map(c=>({ ...c, v: L[c.tier] }));
+    }
+    function chaseEV(R){
+      const sum=values().reduce((s,c)=>s+c.v,0);
+      const gmr=(COPIES/R)*sum;
+      const net=gmr*(1-state.friction)+EV_NORMAL;
+      return { gmr, normal:EV_NORMAL, net, pressure: net/state.boxPx, sum };
+    }
+
+    function snapshot(post){
+      const R=post.median, t=state.day;
+      const O=Math.min(openedAt(t), R);
+      const D=state.physD*R;
+      const remBoxes=Math.max(1, R-O-D);
+      const p=pAny(R, state.coll);
+      const pulled=O*eGmrPerBox(R);
+      const remG=Math.max(0, GMRS-pulled);
+      const dens=remG/remBoxes;
+      const dens0=GMRS/R;
+      const fill=1-Math.exp(-t/8);
+      const ch=chaseEV(R).pressure;
+      let closetT=state.closet*fill;
+      if (ch>1.05) closetT*=Math.max(0.55, 1.25-0.4*ch);
+      closetT=Math.min(0.45, closetT);
+      const L=remBoxes*closetT;
+      const acc=remBoxes-L;
+      const chFill=0.82*Math.exp(-t/22)+0.12;
+      const C=acc*chFill;
+      const U=Math.max(0, acc-C);
+      const gAcc=remG*(acc/remBoxes);
+      const per10k=10000*(gAcc/Math.max(1,acc));
+      return { R, O, D, remBoxes, pulled, remG, dens, dens0, L, acc, C, U, gAcc, per10k, p, closetT, ch };
+    }
+
+    function gradeWord(post){
+      const n=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0);
+      if (n<200) return { g:"E", t:"LOW" };
+      if (n<1200) return { g:"D", t:"LOW–MODERATE" };
+      if (n<5000) return { g:"C", t:"MODERATE" };
+      return { g:"C", t:"MODERATE–HIGH" };
+    }
+
+    function warnings(post, sn){
+      const w=[];
+      const active=SAMPLES.filter(s=>s.on);
+      if (!active.length) w.push("No opening samples in the likelihood. Posterior = prior (median ≈ 245k). R is not identified.");
+      const exp=sn.O*eGmrPerBox(sn.R);
+      if (active.length){
+        const k=active.reduce((a,s)=>a+s.k,0), n=active.reduce((a,s)=>a+s.n,0);
+        const rate=k/n, impl=GMRS/rate;
+        if (Math.abs(impl-sn.R)/sn.R>0.35 && n>=30) w.push("Sample implied R ("+fmt(impl)+") disagrees with posterior median ("+fmt(sn.R)+") by >35%. Check overdispersion or mixed samples.");
+      }
+      if (sn.O>0 && exp>0){
+        w.push("Internal check: "+fmt(sn.O)+" opened × 1,800 / "+fmt(sn.R)+" ⇒ expected "+fmt(exp)+" GMRs pulled. If you believe true hits are outside ~["+fmt(exp*0.55)+"–"+fmt(exp*1.6)+"], the median print is inconsistent with that belief.");
+      }
+      const slot=pAny(sn.R,"slots"), mx=pAny(sn.R,"max1");
+      if (Math.abs(slot-mx)/mx>0.03) w.push("Collation choice moves P(any GMR) by "+pct(Math.abs(slot-mx)/mx)+" at this R.");
+      return w;
+    }
+
+    /* ----- render ----- */
+    function renderHero(post, sn){
+      const conf=gradeWord(post);
+      const one=Math.round(1/sn.p);
+      document.getElementById("hero").innerHTML=`
+        <div class="card"><h2>Americas print R</h2><div class="val"><em>${fmt(post.median)}</em></div><div class="ci">80% ${fmt(post.q10)}–${fmt(post.q90)} · 95% ${fmt(post.q025)}–${fmt(post.q975)} <span class="grade g${conf.g}">${conf.t}</span></div></div>
+        <div class="card"><h2>P(any GMR) unopened box</h2><div class="val">1 / ${one}</div><div class="ci">${pct(sn.p,2)} · E[GMR/box]=${eGmrPerBox(sn.R).toFixed(4)} <span class="grade gC">C</span></div></div>
+        <div class="card"><h2>P(specific name)</h2><div class="val">1 / ${Math.round(1/pName(sn.R,state.coll))}</div><div class="ci">e.g. Dark Magician · ${pct(pName(sn.R,state.coll),3)}</div></div>
+        <div class="card"><h2>Boxes opened (day ${state.day})</h2><div class="val">${fmt(sn.O)}</div><div class="ci">${pct(sn.O/sn.R)} of median print · path ${state.openPath} <span class="grade gD">D</span></div></div>
+        <div class="card"><h2>GMRs likely pulled</h2><div class="val">${fmt(sn.pulled)}</div><div class="ci">of 1,800 · remaining <em>${fmt(sn.remG)}</em> <span class="grade gC">C</span></div></div>
+        <div class="card"><h2>Remaining sealed density</h2><div class="val">1 / ${Math.round(1/sn.dens)}</div><div class="ci">start 1/${Math.round(1/sn.dens0)} · random ripping ⇒ almost unchanged</div></div>
+        <div class="card"><h2>Accessible-channel GMRs</h2><div class="val">${fmt(sn.gAcc)}</div><div class="ci">closet ${fmt(sn.remG-sn.gAcc)} · channel+unopened ${fmt(sn.acc)} boxes</div></div>
+        <div class="card"><h2>Chase pressure</h2><div class="val">${sn.ch.toFixed(2)}×</div><div class="ci">EV / sealed price ${money(state.boxPx)} <span class="grade gE">E</span> ladder</div></div>
+      `;
+      document.getElementById("north").innerHTML=`
+        <div>
+          <h2>North star · GMRs remaining per 10,000 accessible sealed mini-boxes</h2>
+          <div class="val"><em>${sn.per10k.toFixed(1)}</em></div>
+          <div class="ci">Accessible = channel + consumer unopened, not closet, not destroyed. If random, this tracks 10,000 × 1,800 / R and does <strong>not</strong> fall just because packs were opened.</div>
+        </div>
+        <div>
+          <div class="bar" style="height:22px;margin-bottom:8px">
+            <i style="width:${pct(sn.O/sn.R)};background:#d4b45a"></i>
+            <i style="width:${pct(sn.C/sn.R)};background:#3d4a3a"></i>
+            <i style="width:${pct(sn.U/sn.R)};background:#7d8a96"></i>
+            <i style="width:${pct(sn.L/sn.R)};background:#6b8fbf"></i>
+            <i style="width:${pct(sn.D/sn.R)};background:#5c5348"></i>
+          </div>
+          <div class="ci">gold opened · green channel · stone unopened · blue closet · brown destroyed</div>
+          <div class="ci" style="margin-top:8px">Confidence in R: <span class="grade g${conf.g}">${conf.t}</span> · effective sample n=${SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0)}</div>
+        </div>
+      `;
+    }
+
+    function renderWarn(post, sn){
+      const w=warnings(post,sn);
+      const el=document.getElementById("warns");
+      if (!w.length){ el.innerHTML=""; return; }
+      el.innerHTML=`<div class="card warns" style="margin-bottom:12px"><h2>Consistency checker</h2><ul>${w.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+    }
+
+    function renderWhere(sn){
+      const tot=sn.remG;
+      const gC=sn.remG*(sn.C/sn.remBoxes), gU=sn.remG*(sn.U/sn.remBoxes), gL=sn.remG*(sn.L/sn.remBoxes);
+      document.getElementById("where").innerHTML=`
+        <table>
+          <tr><th>State</th><th>Boxes</th><th>Expected GMRs</th></tr>
+          <tr><td>Channel inventory</td><td class="n">${fmt(sn.C)}</td><td class="n">${fmt(gC)}</td></tr>
+          <tr><td>Consumer unopened</td><td class="n">${fmt(sn.U)}</td><td class="n">${fmt(gU)}</td></tr>
+          <tr><td>Long-term closet</td><td class="n">${fmt(sn.L)}</td><td class="n">${fmt(gL)}</td></tr>
+          <tr><td>Opened (pulled)</td><td class="n">${fmt(sn.O)}</td><td class="n">${fmt(sn.pulled)}</td></tr>
+          <tr><td>Physically destroyed</td><td class="n">${fmt(sn.D)}</td><td class="n">${fmt(GMRS*(sn.D/sn.R))}</td></tr>
+        </table>
+        <div class="formula">remaining_density = (1800 − pulled) / (R − opened − destroyed)
+≈ 1800/R when hits match expectation</div>
+      `;
+    }
+
+    function path(xs, ys, x0,y0,W,H,yMax){
+      return xs.map((t,i)=>{
+        const x=x0+(t/(xs.length-1))*W;
+        const y=y0-(ys[i]/yMax)*H;
+        return `${i?"L":"M"}${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(" ");
+    }
+
+    function renderPost(post){
+      const svg=document.getElementById("chartPost");
+      const padL=50,padR=12,padT=10,padB=32,W=1000-padL-padR,H=340-padT-padB,x0=padL,y0=padT+H;
+      const prior=R_GRID.map(R=>1/R);
+      const pz=prior.reduce((a,b)=>a+b,0);
+      const pw=prior.map(x=>x/pz);
+      const yMax=Math.max(...post.w,...pw)*1.12;
+      const xs=R_GRID.map((_,i)=>i);
+      let grid="";
+      [100,200,300,400,500,600].forEach(k=>{
+        const x=x0+((k*1000-RMIN)/(RMAX-RMIN))*W;
+        grid+=`<line x1="${x}" x2="${x}" y1="${padT}" y2="${y0}" stroke="#2a241c"/><text x="${x}" y="${y0+16}" fill="#6e6558" font-size="10" font-family="IBM Plex Mono" text-anchor="middle">${k}k</text>`;
+      });
+      const medX=x0+((post.median-RMIN)/(RMAX-RMIN))*W;
+      const bandX0=x0+((post.q10-RMIN)/(RMAX-RMIN))*W;
+      const bandX1=x0+((post.q90-RMIN)/(RMAX-RMIN))*W;
+      const area=(w,c,o)=>{
+        const d=path(xs,w,x0,y0,W,H,yMax)+` L${x0+W},${y0} L${x0},${y0} Z`;
+        return `<path d="${d}" fill="${c}" opacity="${o}"/>`;
+      };
+      svg.innerHTML=grid+
+        `<rect x="${bandX0}" y="${padT}" width="${bandX1-bandX0}" height="${H}" fill="#6b8fbf" opacity=".08"/>`+
+        area(pw,"#e8e0d4",.08)+area(post.w,"#d4b45a",.25)+
+        `<path d="${path(xs,post.w,x0,y0,W,H,yMax)}" fill="none" stroke="#d4b45a" stroke-width="2"/>`+
+        `<line x1="${medX}" x2="${medX}" y1="${padT}" y2="${y0}" stroke="#6b8fbf" stroke-dasharray="4 3"/>`;
+      const n=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0);
+      const k=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.k,0);
+      document.getElementById("postNote").innerHTML=
+        `Median ${fmt(post.median)} · 80% [${fmt(post.q10)}, ${fmt(post.q90)}] · 95% [${fmt(post.q025)}, ${fmt(post.q975)}]. `+
+        (n?`Likelihood uses ${k} GMR / ${n} boxes.`:`Prior only.`)+
+        ` Slot vs max-1 P(any) at median: ${pct(pAny(post.median,"slots"),3)} vs ${pct(pAny(post.median,"max1"),3)}.`;
+    }
+
+    function renderSamples(){
+      document.getElementById("samples").innerHTML=`<tr><th></th><th>n boxes</th><th>k GMR</th><th>Region</th><th>Grade</th><th>Note</th></tr>`+
+        SAMPLES.map(s=>`<tr>
+          <td><input type="checkbox" data-id="${s.id}" ${s.on?"checked":""}/></td>
+          <td class="n">${s.n}</td><td class="n">${s.k}</td>
+          <td>${s.region}</td><td><span class="grade g${s.grade}">${s.grade}</span></td>
+          <td>${s.note}</td>
+        </tr>`).join("");
+      document.querySelectorAll("#samples input").forEach(inp=>{
+        inp.onchange=()=>{ SAMPLES.find(s=>s.id===inp.dataset.id).on=inp.checked; render(); };
+      });
+    }
+
+    function simStates(R){
+      const out=[];
+      for (let t=0;t<=HORIZON;t++){
+        const O=Math.min(openedAt(t), R);
+        const D=state.physD*R;
+        const rem=Math.max(0,R-O-D);
+        const fill=1-Math.exp(-t/8);
+        const ch=chaseEV(R).pressure;
+        let ct=state.closet*fill;
+        if (ch>1.05) ct*=Math.max(0.55, 1.25-0.4*ch);
+        const L=rem*Math.min(0.45,ct);
+        const acc=rem-L;
+        const cf=0.82*Math.exp(-t/22)+0.12;
+        const C=acc*cf, U=Math.max(0,acc-C);
+        out.push({t,C,U,L,O,D});
+      }
+      return out;
+    }
+
+    function renderState(post){
+      const svg=document.getElementById("chartState");
+      const st=simStates(post.median);
+      const padL=50,padR=12,padT=10,padB=32,W=1000-padL-padR,H=340-padT-padB,x0=padL,y0=padT+H;
+      const yMax=post.median*1.02;
+      const xs=st.map((_,i)=>i);
+      const stack=(keys,colors)=>{
+        let acc=st.map(()=>0), html="";
+        keys.forEach((k,ki)=>{
+          const top=st.map((s,i)=>acc[i]+s[k]);
+          const d=path(xs,top,x0,y0,W,H,yMax)+` L${x0+W},${y0} L${x0},${y0} Z`;
+          html+=`<path d="${d}" fill="${colors[ki]}" opacity=".85"/>`;
+          acc=top;
+        });
+        return html;
+      };
+      let grid="";
+      [0,7,14,30,60,90].forEach(t=>{
+        const x=x0+(t/HORIZON)*W;
+        grid+=`<line x1="${x}" x2="${x}" y1="${padT}" y2="${y0}" stroke="#2a241c"/><text x="${x}" y="${y0+16}" fill="#6e6558" font-size="10" font-family="IBM Plex Mono" text-anchor="middle">${t===0?"OTS":"d"+t}</text>`;
+      });
+      const tx=x0+(state.day/HORIZON)*W;
+      svg.innerHTML=grid+stack(["D","O","L","U","C"],["#5c5348","#d4b45a","#6b8fbf","#7d8a96","#3d4a3a"])+
+        `<line x1="${tx}" x2="${tx}" y1="${padT}" y2="${y0}" stroke="#e8e0d4" stroke-dasharray="3 4" opacity=".5"/>`;
+    }
+
+    function renderDensity(post){
+      const svg=document.getElementById("chartDensity");
+      const st=simStates(post.median);
+      const R=post.median;
+      const dens=st.map(s=>{
+        const remB=Math.max(1,R-s.O-s.D);
+        const pulled=s.O*eGmrPerBox(R);
+        return (GMRS-pulled)/remB;
+      });
+      const count=st.map(s=>GMRS-s.O*eGmrPerBox(R));
+      const padL=50,padR=50,padT=12,padB=32,W=1000-padL-padR,H=280-padT-padB,x0=padL,y0=padT+H;
+      const xs=st.map((_,i)=>i);
+      const dMax=Math.max(...dens)*1.2, cMax=GMRS;
+      const pD=path(xs,dens,x0,y0,W,H,dMax);
+      const pC=xs.map((t,i)=>{
+        const x=x0+(t/HORIZON)*W;
+        const y=y0-(count[i]/cMax)*H;
+        return `${i?"L":"M"}${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(" ");
+      let grid="";
+      [0,30,60,90].forEach(t=>{
+        const x=x0+(t/HORIZON)*W;
+        grid+=`<line x1="${x}" x2="${x}" y1="${padT}" y2="${y0}" stroke="#2a241c"/><text x="${x}" y="${y0+16}" fill="#6e6558" font-size="10" font-family="IBM Plex Mono" text-anchor="middle">d${t}</text>`;
+      });
+      svg.innerHTML=grid+
+        `<path d="${pD}" fill="none" stroke="#d4b45a" stroke-width="2.2"/>`+
+        `<path d="${pC}" fill="none" stroke="#c45c3a" stroke-width="1.6" stroke-dasharray="5 3"/>`+
+        `<text x="${x0+8}" y="${padT+12}" fill="#d4b45a" font-size="11" font-family="IBM Plex Mono">density (solid)</text>`+
+        `<text x="${x0+8}" y="${padT+26}" fill="#c45c3a" font-size="11" font-family="IBM Plex Mono">remaining count (dash)</text>`;
+    }
+
+    function renderStateTable(sn){
+      document.getElementById("stateTable").innerHTML=`
+        <tr><th>State</th><th>Boxes</th><th>% print</th></tr>
+        <tr><td>Channel C</td><td class="n">${fmt(sn.C)}</td><td class="n">${pct(sn.C/sn.R)}</td></tr>
+        <tr><td>Consumer unopened U</td><td class="n">${fmt(sn.U)}</td><td class="n">${pct(sn.U/sn.R)}</td></tr>
+        <tr><td>Closet L (unlockable)</td><td class="n">${fmt(sn.L)}</td><td class="n">${pct(sn.L/sn.R)}</td></tr>
+        <tr><td>Opened O</td><td class="n">${fmt(sn.O)}</td><td class="n">${pct(sn.O/sn.R)}</td></tr>
+        <tr><td>Physically destroyed D</td><td class="n">${fmt(sn.D)}</td><td class="n">${pct(sn.D/sn.R)}</td></tr>
+        <tr><td>Rip pool C+U</td><td class="n">${fmt(sn.acc)}</td><td class="n">${pct(sn.acc/sn.R)}</td></tr>
+      `;
+    }
+
+    function renderChase(post){
+      const ev=chaseEV(post.median);
+      document.getElementById("chaseCard").innerHTML=`
+        <h2>Chase Pressure Index</h2>
+        <div class="val"><em>${ev.pressure.toFixed(2)}×</em></div>
+        <div class="ci">net EV ${money(ev.net)} / box ${money(state.boxPx)}</div>
+        <div class="formula">
+          EV_GMR = (100 / R) × Σ Vᵢ = ${money(ev.gmr)}<br>
+          EV_normal ≈ ${money(EV_NORMAL)} (UR/Secret floor, grade C)<br>
+          EV_net = EV_GMR×(1−friction)+EV_normal = ${money(ev.net)}<br>
+          Pressure = EV_net / sealed_price
+        </div>
+        <p class="ci" style="margin-top:10px">A $12k Dark Magician sold raises ΣV, therefore pressure, without a hand-set 1.20 multiplier. Pressure &gt; 1 does not mean +EV after variance — it means the ticket feels hotter. <span class="grade gE">E</span> until English solds exist.</p>
+      `;
+      document.getElementById("ladderTable").innerHTML=`<tr><th>Card</th><th>Tier</th><th>Vᵢ</th></tr>`+
+        values().map(c=>`<tr><td>${c.name}</td><td>${c.tier}</td><td class="n">${c.v?money(c.v):"$0"}</td></tr>`).join("");
+    }
+
+    function render(){
+      const post=posterior();
+      const sn=snapshot(post);
+      renderWarn(post,sn);
+      renderHero(post,sn);
+      renderWhere(sn);
+      renderPost(post);
+      renderSamples();
+      renderState(post);
+      renderDensity(post);
+      renderStateTable(sn);
+      renderChase(post);
+    }
+
+    document.getElementById("tabs").onclick=e=>{
+      const b=e.target.closest("button[data-p]"); if(!b) return;
+      document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));
+      document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on", p.id==="p-"+b.dataset.p));
+    };
+    document.getElementById("collation").onclick=e=>{
+      const b=e.target.closest("[data-v]"); if(!b) return;
+      state.coll=b.dataset.v;
+      document.querySelectorAll("#collation .chip").forEach(x=>x.classList.toggle("on",x===b));
+      render();
+    };
+    document.getElementById("liketype").onclick=e=>{
+      const b=e.target.closest("[data-v]"); if(!b) return;
+      state.like=b.dataset.v;
+      document.querySelectorAll("#liketype .chip").forEach(x=>x.classList.toggle("on",x===b));
+      render();
+    };
+    document.getElementById("openPath").onclick=e=>{
+      const b=e.target.closest("[data-v]"); if(!b) return;
+      state.openPath=b.dataset.v;
+      document.querySelectorAll("#openPath .chip").forEach(x=>x.classList.toggle("on",x===b));
+      render();
+    };
+    document.getElementById("ladder").onclick=e=>{
+      const b=e.target.closest("[data-v]"); if(!b) return;
+      state.ladder=b.dataset.v;
+      document.querySelectorAll("#ladder .chip").forEach(x=>x.classList.toggle("on",x===b));
+      render();
+    };
+    document.getElementById("usShare").oninput=e=>{ state.usShare=+e.target.value/100; document.getElementById("usLab").textContent=e.target.value+"%"; render(); };
+    document.getElementById("day").oninput=e=>{ state.day=+e.target.value; document.getElementById("dayLab").textContent=e.target.value; render(); };
+    document.getElementById("closet").oninput=e=>{ state.closet=+e.target.value/100; document.getElementById("clLab").textContent=e.target.value+"%"; render(); };
+    document.getElementById("boxPx").oninput=e=>{ state.boxPx=+e.target.value; document.getElementById("pxLab").textContent=e.target.value; render(); };
+    document.getElementById("friction").oninput=e=>{ state.friction=+e.target.value/100; document.getElementById("frLab").textContent=e.target.value+"%"; render(); };
+
+    render();
+  </script>
+</body>
+</html>
