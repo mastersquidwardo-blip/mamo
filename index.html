@@ -101,6 +101,7 @@
       <button class="on" data-p="overview">Overview</button>
       <button data-p="inference">Print inference</button>
       <button data-p="depletion">Depletion &amp; states</button>
+      <button data-p="crowd">Crowd log</button>
       <button data-p="chase">Chase pressure</button>
       <button data-p="evidence">Evidence &amp; mind-changers</button>
     </div>
@@ -163,7 +164,32 @@
       <div class="card" style="margin-top:12px">
         <h2>Opening samples in the likelihood · toggle to update R</h2>
         <table id="samples"></table>
-        <p class="ci">Public GMR tweets without a denominator are <strong>not</strong> in this likelihood. They belong on Evidence. A 40-box case with 0 GMRs is worth more than a viral Dark Magician photo.</p>
+        <p class="ci">Public GMR tweets without a denominator are <strong>not</strong> in this likelihood. They belong on the Crowd serial registry. A 40-box case with 0 GMRs is worth more than a viral Dark Magician photo.</p>
+      </div>
+    </div>
+
+    <!-- CROWD -->
+    <div class="panel" id="p-crowd">
+      <div class="grid hero" id="crowdKpis"></div>
+      <div class="card" style="margin-top:12px">
+        <h2>Crowdsourced rips · @Kramaramb thread 4 Sep 2026</h2>
+        <p class="ci" style="margin-bottom:8px">Self-reported. Overframe = extended-art UR, not GMR. Packs converted at 3 packs = 1 mini-box. Include in R likelihood via the crowd sample toggle on Print inference (on by default).</p>
+        <table id="crowdTable"></table>
+      </div>
+      <div class="grid two" style="margin-top:12px">
+        <div class="card">
+          <h2>Americas GMR serial registry · deduped</h2>
+          <table id="regTable"></table>
+          <p class="ci" style="margin-top:8px">Listings and pull posts without a box denominator do not enter the print-run likelihood.</p>
+        </div>
+        <div class="card prose">
+          <h2>Call for data</h2>
+          <p>Location is only for collation / hotspot checks. E-suffix cards are Europe-distributed and stay out of Americas R.</p>
+          <div class="formula">
+            Share: packs ripped · starlights · overframes · GMRs · region<br>
+            1 mini-box = 3 packs + 3 bonus Secrets
+          </div>
+        </div>
       </div>
     </div>
 
@@ -283,7 +309,8 @@
           <tr><td>MSRP</td><td class="n">$34.99</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays ≈ 17,879</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>TCGPlayer box market ~3–4 Sep</td><td class="n">$32–41 (June high ~$123)</td><td><span class="grade gB">B</span></td></tr>
-          <tr><td>Public Dark Magician GMR sightings</td><td class="n">≥2 (049/100 + one more)</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>Public Americas GMR serials</td><td class="n">049/100 Dark Magician; 052/100 Shining Flare Wingman (Temple City, CA, eBay)</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>Crowd rips with GMR count (4 Sep)</td><td class="n">~61 boxes, 0 GMR, 3 overframes, 2 starlights</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>Whatnot OTS-night GMRs</td><td class="n">4 claimed / denominator ~400–600</td><td><span class="grade gC">C</span></td></tr>
           <tr><td>72h Americas boxes opened</td><td class="n">4k–8k, base 5.5k (content/OTS sensors)</td><td><span class="grade gD">D</span></td></tr>
           <tr><td>Physical destruction rate</td><td class="n">0.25% of print</td><td><span class="grade gE">E</span></td></tr>
@@ -334,7 +361,24 @@
     };
     const EV_NORMAL = 12;
 
+    const CROWD = [
+      { who:"maya_jillian75", packs:24, boxes:8, gmr:0, of:null, sl:null, geo:"unknown", note:"8 boxes, no GMR. OF/SL not reported." },
+      { who:"poketeejay", packs:18, boxes:6, gmr:0, of:0, sl:0, geo:"unknown", note:"Six mini boxes, no full art or starlight." },
+      { who:"ruxin34", packs:30, boxes:10, gmr:0, of:1, sl:null, geo:"unknown", note:"1 display (10 boxes), 1 overframe. Overframe ≠ GMR." },
+      { who:"JohnWindschauer", packs:12, boxes:4, gmr:0, of:0, sl:1, slName:"S:P Little Knight", geo:"Florida", note:"4 boxes, 1 starlight, 0 GMR." },
+      { who:"bybriangoins", packs:63, boxes:21, gmr:0, of:1, sl:null, geo:"Nashville", note:"21 boxes, 1 ultra overframe." },
+      { who:"pwrlvllemillion", packs:12, boxes:4, gmr:0, of:1, sl:null, geo:"Dallas", note:"4 boxes, Dark Magician overframe (UR full art, not GMR)." },
+      { who:"scusemepls", packs:4, boxes:4/3, gmr:0, of:0, sl:1, slName:"Ruler of the End", geo:"unknown", note:"4 packs (not boxes), 1 starlight." },
+      { who:"dooddoodly", packs:18, boxes:6, gmr:0, of:0, sl:0, geo:"unknown", note:"6 boxes, zero overframe, zero starlight." },
+      { who:"duskrei", packs:3, boxes:1, gmr:0, of:0, sl:0, geo:"unknown", note:"3 packs, 0/0/0." }
+    ];
+    const SIGHTINGS = [
+      { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"049/100", region:"Americas", geo:"unknown", source:"X / Reddit public pull", sold:false },
+      { card:"Favorite HERO Shining Flare Wingman", set:"MAMO-EN004", serial:"052/100", region:"Americas", geo:"Temple City, CA", source:"eBay listing (ask, not sold)", sold:false }
+    ];
     const SAMPLES = [
+      { id: "crowd", on: true, n: 0, k: 0, region: "US", grade: "B", overdisp: true,
+        note: "Kramaramb crowdsource 4 Sep. Line items on Crowd tab. 0 GMR in reported rips." },
       { id: "content", on: true, n: 550, k: 4, region: "US", grade: "C", overdisp: true,
         note: "OTS-week content/Whatnot: ~4 GMRs vs ~550 documented boxes. Weak denominator." },
       { id: "hunt50", on: false, n: 50, k: 0, region: "US", grade: "B", overdisp: false,
@@ -402,7 +446,26 @@
     }
     function eGmrPerBox(R){ return GMRS/R; }
 
+    function crowdStats(){
+      let boxes=0, packs=0, gmr=0, ofB=0, ofH=0, slB=0, slH=0;
+      for (const r of CROWD){
+        boxes += r.boxes;
+        packs += r.packs;
+        gmr += r.gmr;
+        if (r.of != null){ ofB += r.boxes; ofH += r.of; }
+        if (r.sl != null){ slB += r.boxes; slH += r.sl; }
+      }
+      return { boxes, packs, gmr, ofB, ofH, slB, slH, nBox: Math.round(boxes) };
+    }
+    function syncCrowdSample(){
+      const c=crowdStats();
+      const s=SAMPLES.find(x=>x.id==="crowd");
+      if (s){ s.n=c.nBox; s.k=c.gmr; s.note=`Crowdsource 4 Sep: ${c.nBox} boxes, ${c.gmr} GMR, ${c.ofH} OF / ${c.ofB.toFixed(1)} boxes, ${c.slH} SL / ${c.slB.toFixed(1)} boxes.`; }
+      return c;
+    }
+
     function posterior(){
+      syncCrowdSample();
       const active=SAMPLES.filter(s=>s.on);
       const logp=R_GRID.map(R=>{
         let lp=-Math.log(R);
@@ -590,6 +653,7 @@
     }
 
     function renderSamples(){
+      syncCrowdSample();
       document.getElementById("samples").innerHTML=`<tr><th></th><th>n boxes</th><th>k GMR</th><th>Region</th><th>Grade</th><th>Note</th></tr>`+
         SAMPLES.map(s=>`<tr>
           <td><input type="checkbox" data-id="${s.id}" ${s.on?"checked":""}/></td>
@@ -600,6 +664,35 @@
       document.querySelectorAll("#samples input").forEach(inp=>{
         inp.onchange=()=>{ SAMPLES.find(s=>s.id===inp.dataset.id).on=inp.checked; render(); };
       });
+    }
+
+    function renderCrowd(){
+      const c=syncCrowdSample();
+      const ofRate=c.ofB? c.ofH/c.ofB : NaN;
+      const slRate=c.slB? c.slH/c.slB : NaN;
+      document.getElementById("crowdKpis").innerHTML=`
+        <div class="card"><h2>Reported mini-boxes</h2><div class="val">${c.boxes.toFixed(1)}</div><div class="ci">${c.packs} packs · 3 packs = 1 box</div></div>
+        <div class="card"><h2>GMRs in those rips</h2><div class="val">${c.gmr}</div><div class="ci">0 / ${c.nBox} enters likelihood as sample “crowd”</div></div>
+        <div class="card"><h2>Overframes (UR full art)</h2><div class="val">${c.ofH}</div><div class="ci">${c.ofB? ("1 / "+(c.ofB/Math.max(c.ofH,1e-9)).toFixed(1)+" boxes among reporters"):"n too small"} · not GMR</div></div>
+        <div class="card"><h2>Starlights</h2><div class="val">${c.slH}</div><div class="ci">${c.slB? ("1 / "+(c.slB/Math.max(c.slH,1e-9)).toFixed(1)+" boxes among reporters"):"—"}</div></div>
+      `;
+      document.getElementById("crowdTable").innerHTML=`<tr><th>Who</th><th>Geo</th><th>Boxes</th><th>Packs</th><th>GMR</th><th>OF</th><th>SL</th><th>Note</th></tr>`+
+        CROWD.map(r=>`<tr>
+          <td>${r.who}</td><td>${r.geo}</td>
+          <td class="n">${r.boxes%1? r.boxes.toFixed(2): r.boxes}</td>
+          <td class="n">${r.packs}</td>
+          <td class="n">${r.gmr}</td>
+          <td class="n">${r.of==null?"—":r.of}</td>
+          <td class="n">${r.sl==null?"—":r.sl}${r.slName?" ("+r.slName+")":""}</td>
+          <td>${r.note}</td>
+        </tr>`).join("");
+      document.getElementById("regTable").innerHTML=`<tr><th>Card</th><th>Serial</th><th>Region</th><th>Geo</th><th>Source</th><th>Sold?</th></tr>`+
+        SIGHTINGS.map(s=>`<tr>
+          <td>${s.card}<div class="ci">${s.set}</div></td>
+          <td class="n">${s.serial}</td>
+          <td>${s.region}</td><td>${s.geo}</td><td>${s.source}</td>
+          <td>${s.sold?"yes":"no / listing"}</td>
+        </tr>`).join("");
     }
 
     function simStates(R){
@@ -720,6 +813,7 @@
       renderDensity(post);
       renderStateTable(sn);
       renderChase(post);
+      renderCrowd();
     }
 
     document.getElementById("tabs").onclick=e=>{
