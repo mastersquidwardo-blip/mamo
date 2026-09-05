@@ -1,4 +1,4 @@
-﻿# MAMO destruction dashboard — project scope
+# MAMO destruction dashboard - project scope
 
 Living rules for Magnificent Monsters GMR depletion / chasability work.
 Local path: `G:\My Drive\Grok Build\14-mamo-destruction-dashboard`
@@ -25,7 +25,7 @@ Goal: count each physical rip once in likelihood samples, without collapsing leg
 ### Merge when
 - Same source post (or quote-repost of the same numbers)
 - Same reporter + same day + same boxes/packs + same GMR/OF/SL counts (near-identical claims)
-- Cross-platform mirrors (X ↔ Reddit) of the same rip text / screenshot
+- Cross-platform mirrors (X - Reddit) of the same rip text / screenshot
 
 ### Working keys (private; not published)
 1. `source_url` or platform+post id (strongest)
@@ -34,7 +34,7 @@ Goal: count each physical rip once in likelihood samples, without collapsing leg
 
 ### Published fields only
 - Crowd rips: `country`, packs, boxes, gmr, of, sl (aggregated)
-- Serial map: `country` (null → "unknown", not plotted), card, serial, Americas vs E-suffix region
+- Serial map: `country` (null  to  "unknown", not plotted), card, serial, Americas vs E-suffix region
 
 ## 3. Local-first
 
@@ -55,7 +55,7 @@ OF/SL in **North America crowd samples** may still appear as ancillary stats on 
 
 - Keep refining R (print run) likelihood, depletion curves, and chase pressure as samples grow.
 - Public GMR tweets **without a box denominator** stay out of the likelihood; they belong on the serial / map side only.
-- Crowd sample toggle stays the bridge from anonymized rips → print inference.
+- Crowd sample toggle stays the bridge from anonymized rips  to  print inference.
 
 ## 6. Sources (priority)
 
@@ -70,20 +70,25 @@ OF/SL in **North America crowd samples** may still appear as ancillary stats on 
 
 ## 7. Print-run estimation via online retail (USA)
 
-Tentative channel model (operator hypothesis — refine with data):
+Tentative channel model (operator hypothesis - refine with data):
 
 | Channel | Share of print | Notes |
 | --- | --- | --- |
 | Retail total | 50% | Big-box + mass ecommerce |
-| — online | 40% of retail (= 20% of print) | First-party web storefronts |
-| — physical stores | 60% of retail (= 30% of print) | In-store shelves |
+| - online | 40% of retail (= 20% of print) | First-party web storefronts |
+| - physical stores | 60% of retail (= 30% of print) | In-store shelves |
 | LGS total | 50% | Local game stores / OTS |
-| — LGS online | part of LGS | Shop sites, some marketplace |
-| — LGS in-person | rest of LGS | |
+| - LGS online | part of LGS | Shop sites, some marketplace |
+| - LGS in-person | rest of LGS | |
 
 ### Data camps
-- **Camp A — 1P online (USA):** Walmart, Target, Amazon sold-by-retailer only. Track mini-boxes and displays (10 mini-boxes) / cases (12) separately.
-- **Camp B — 3P online (USA):** 3P sellers on WM/Target/Amazon + eBay + TCGPlayer.
+- **Camp A - 1P online (USA):** Walmart, Target, Amazon sold-by-retailer only. Track mini-boxes and displays (10 mini-boxes) / cases (12) separately.
+- **Camp B - 3P online (USA):** 3P sellers on WM/Target/Amazon + eBay + TCGPlayer.
 
-Use Camp A to bound DC/online retail sell-through; Camp B for broader online liquidity. Do not treat listing counts as print run directly — invert through the allocation shares above.
+Use Camp A to bound DC/online retail sell-through; Camp B for broader online liquidity. Do not treat listing counts as print run directly - invert through the allocation shares above.
 
+
+## Private serial ledger
+- Path: `_private/serial-ledger.json` (gitignored). Source of truth for all pulled/listed serialized GMRs, including unknown serial digits.
+- May store handles, URLs, and private place codes for research. Never publish those fields.
+- Public `SIGHTINGS` in `index.html` is a privacy-scrubbed projection only.
