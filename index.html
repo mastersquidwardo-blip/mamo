@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MAMO · GMR depletion &amp; chasability</title>
+  <title>MAMO Â· GMR depletion &amp; chasability</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -93,7 +93,7 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="kicker">Magnificent Monsters · Americas · probabilistic depletion</div>
+    <div class="kicker">Magnificent Monsters Â· Americas Â· probabilistic depletion</div>
     <h1>How many GMRs are still in sealed boxes, <span>and how chasable is what remains?</span></h1>
     <p class="sub">
       Print run <strong>R is inferred</strong>, not assumed. 180k is not a fact. Density of remaining sealed is not automatically worse because packs were opened.
@@ -124,7 +124,7 @@
         <div class="card">
           <h2>Where remaining sealed GMRs probably sit</h2>
           <div id="where"></div>
-          <p class="ci" style="margin-top:10px">Random seeding unless collation evidence says otherwise. Closet is not terminal — it can unlock if chase pressure rises.</p>
+          <p class="ci" style="margin-top:10px">Random seeding unless collation evidence says otherwise. Closet is not terminal â€” it can unlock if chase pressure rises.</p>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@
             <button class="chip on" data-v="max1">Max 1 / box</button>
             <button class="chip" data-v="slots">Independent slots</button>
           </div>
-          <span>3 Pool-A slots/box. Max-1 is unproven. Slot model: P(any)=1-(1-1800/(3R))³</span>
+          <span>3 Pool-A slots/box. Max-1 is unproven. Slot model: P(any)=1-(1-1800/(3R))Â³</span>
         </label>
         <label class="ctrl card">
           <strong>Likelihood</strong>
@@ -146,16 +146,16 @@
             <button class="chip on" data-v="bb">Beta-binomial</button>
             <button class="chip" data-v="bin">IID binomial</button>
           </div>
-          <span>Case clustering → overdispersed. IID assumes every box is independent.</span>
+          <span>Case clustering â†’ overdispersed. IID assumes every box is independent.</span>
         </label>
         <label class="ctrl card">
-          <strong>US share of Americas print · <span id="usLab">75%</span></strong>
+          <strong>US share of Americas print Â· <span id="usLab">75%</span></strong>
           <input id="usShare" type="range" min="55" max="90" value="75" />
           <span>Does not change p=f(R) if seeding is random. Changes opening extrapolation and location split. <span class="grade gE">E</span></span>
         </label>
       </div>
       <div class="card">
-        <h2>Posterior of Americas mini-box print R · log-uniform prior 100k–600k</h2>
+        <h2>Posterior of Americas mini-box print R Â· log-uniform prior 100kâ€“600k</h2>
         <svg class="chart chart-lg" id="chartPost" viewBox="0 0 1000 340"></svg>
         <div class="legend">
           <span><i class="sw" style="background:#d4b45a"></i>Posterior</span>
@@ -165,7 +165,7 @@
         <p class="ci" id="postNote"></p>
       </div>
       <div class="card" style="margin-top:12px">
-        <h2>Opening samples in the likelihood · toggle to update R</h2>
+        <h2>Opening samples in the likelihood Â· toggle to update R</h2>
         <table id="samples"></table>
         <p class="ci">Public GMR tweets without a denominator are <strong>not</strong> in this likelihood. They belong on the Crowd serial registry. A 40-box case with 0 GMRs is worth more than a viral Dark Magician photo.</p>
       </div>
@@ -175,7 +175,7 @@
     <div class="panel" id="p-crowd">
       <div class="grid hero" id="crowdKpis"></div>
       <div class="card" style="margin-top:12px">
-        <h2>Serialized GMR locations · country only</h2>
+        <h2>Serialized GMR locations Â· country only</h2>
         <p class="ci" style="margin-bottom:8px">Hard rule: no names, no cities. E-suffix = Europe-distributed, plotted separately from Americas. Unknown country is not placed on the map.</p>
         <div class="map-wrap">
           <svg id="gmrMap" viewBox="0 0 1000 480"></svg>
@@ -189,9 +189,9 @@
           <table id="crowdTable"></table>
         </div>
         <div class="card">
-          <h2>Serial registry · country</h2>
+          <h2>Serial registry Â· country</h2>
           <table id="regTable"></table>
-          <p class="ci" style="margin-top:8px">No box denominator → not in print-run likelihood.</p>
+          <p class="ci" style="margin-top:8px">No box denominator â†’ not in print-run likelihood.</p>
         </div>
       </div>
     </div>
@@ -206,15 +206,15 @@
             <button class="chip on" data-v="base">Base</button>
             <button class="chip" data-v="aggressive">Aggressive</button>
           </div>
-          <span>Independent of R. Sales ≠ openings. <span class="grade gD">D</span></span>
+          <span>Independent of R. Sales â‰  openings. <span class="grade gD">D</span></span>
         </label>
         <label class="ctrl card">
-          <strong>Day · <span id="dayLab">2</span> (today)</strong>
+          <strong>Day Â· <span id="dayLab">2</span> (today)</strong>
           <input id="day" type="range" min="0" max="90" value="2" />
           <span>Day 0 = OTS 2 Sep 2026. Today = day 2.</span>
         </label>
         <label class="ctrl card">
-          <strong>Closet target · <span id="clLab">12%</span> of remaining sealed</strong>
+          <strong>Closet target Â· <span id="clLab">12%</span> of remaining sealed</strong>
           <input id="closet" type="range" min="2" max="30" value="12" />
           <span>Can unlock if chase pressure &gt; 1. Not NRF shrink. <span class="grade gD">D</span></span>
         </label>
@@ -236,12 +236,12 @@
           <table id="stateTable"></table>
         </div>
         <div class="card prose">
-          <h3>Why “shrink” is not in the rip formula</h3>
+          <h3>Why â€œshrinkâ€ is not in the rip formula</h3>
           <p>NRF 1.6% is <strong>retail sales-value loss</strong>, FY2022, last official number. A stolen Walmart box is usually opened. A crushed box is usually discounted and opened. That is untracked opening, not disappearance.</p>
           <p><strong>Physical destruction</strong> (fire, water, landfill) is the only terminal loss of units. Default <strong>0.25%</strong> of print <span class="grade gE">E</span>. Accounting shrink is tracked separately and does not shrink the GMR denominator.</p>
           <div class="formula">
-            PRINT → CHANNEL → CONSUMER_UNOPENED ⇄ CLOSET<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↘ OPENED<br>
+            PRINT â†’ CHANNEL â†’ CONSUMER_UNOPENED â‡„ CLOSET<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;â†˜ OPENED<br>
             PHYS_DESTROYED is a tiny side exit from channel/unopened.
           </div>
         </p>
@@ -253,9 +253,9 @@
     <div class="panel" id="p-chase">
       <div class="grid three" style="margin-bottom:12px">
         <label class="ctrl card">
-          <strong>Sealed mini-box price · $<span id="pxLab">35</span></strong>
+          <strong>Sealed mini-box price Â· $<span id="pxLab">35</span></strong>
           <input id="boxPx" type="range" min="20" max="120" value="35" />
-          <span>TCGPlayer ~$32–41 on 3–4 Sep. MSRP $34.99. <span class="grade gB">B</span></span>
+          <span>TCGPlayer ~$32â€“41 on 3â€“4 Sep. MSRP $34.99. <span class="grade gB">B</span></span>
         </label>
         <label class="ctrl card">
           <strong>GMR value preset</strong>
@@ -267,7 +267,7 @@
           <span>Asks are not solds. Placeholders are <span class="grade gE">E</span>.</span>
         </label>
         <label class="ctrl card">
-          <strong>Sell friction · <span id="frLab">18%</span></strong>
+          <strong>Sell friction Â· <span id="frLab">18%</span></strong>
           <input id="friction" type="range" min="5" max="35" value="18" />
           <span>Fees, time, condition. Applied to GMR EV only.</span>
         </label>
@@ -275,7 +275,7 @@
       <div class="grid two">
         <div class="card" id="chaseCard"></div>
         <div class="card">
-          <h2>Placeholder GMR ladder · not English solds</h2>
+          <h2>Placeholder GMR ladder Â· not English solds</h2>
           <table id="ladderTable"></table>
         </div>
       </div>
@@ -287,18 +287,18 @@
         <div class="card prose">
           <h2>What would change our mind</h2>
           <ol class="mind">
-            <li><strong>500+ documented mini-box openings with GMR count</strong> — collapses the R interval more than any tweet.</li>
-            <li><strong>Several full 40-box case breaks</strong> — tests clustering / overdispersion.</li>
-            <li><strong>Confirmed collation</strong> — max-1 vs independent slots. Switch is already in Inference.</li>
-            <li><strong>Deduplicated Americas serial registry</strong> — public hits become usable (with a reporting model).</li>
-            <li><strong>Walmart / LGS sell-through</strong> — sales ≠ openings, but they bound consumer-unopened.</li>
-            <li><strong>First trustworthy English GMR sold ladder</strong> — Chase Pressure leaves grade E.</li>
-            <li><strong>Reprint / second allocation evidence</strong> — would break the closed 1,800 identity for remaining density.</li>
+            <li><strong>500+ documented mini-box openings with GMR count</strong> â€” collapses the R interval more than any tweet.</li>
+            <li><strong>Several full 40-box case breaks</strong> â€” tests clustering / overdispersion.</li>
+            <li><strong>Confirmed collation</strong> â€” max-1 vs independent slots. Switch is already in Inference.</li>
+            <li><strong>Deduplicated Americas serial registry</strong> â€” public hits become usable (with a reporting model).</li>
+            <li><strong>Walmart / LGS sell-through</strong> â€” sales â‰  openings, but they bound consumer-unopened.</li>
+            <li><strong>First trustworthy English GMR sold ladder</strong> â€” Chase Pressure leaves grade E.</li>
+            <li><strong>Reprint / second allocation evidence</strong> â€” would break the closed 1,800 identity for remaining density.</li>
           </ol>
         </div>
         <div class="card prose">
-          <h2>Known unknowns · preserved from the research log</h2>
-          <p>No Konami print run, allocation, or GMR ratio. No Whatnot/LGS/Walmart rip ledger. No counted OTS census (45-page PDF only). No English TCG GMR solds — asks exist, tape does not. No pack-code decoder. “Case” on YGO Twitter is 10 or 40. OCG “6,000 boxes per name” is hearsay on a different SKU. NRF shrink is sales value, not TCG units. Clone-cohort holder counts are illustrations.</p>
+          <h2>Known unknowns Â· preserved from the research log</h2>
+          <p>No Konami print run, allocation, or GMR ratio. No Whatnot/LGS/Walmart rip ledger. No counted OTS census (45-page PDF only). No English TCG GMR solds â€” asks exist, tape does not. No pack-code decoder. â€œCaseâ€ on YGO Twitter is 10 or 40. OCG â€œ6,000 boxes per nameâ€ is hearsay on a different SKU. NRF shrink is sales value, not TCG units. Clone-cohort holder counts are illustrations.</p>
           <p>US TCGPlayer/Walmart evidence is not the full Americas denominator. E-suffix GMRs are a separate 1,800 and are excluded from R inference.</p>
         </div>
       </div>
@@ -306,28 +306,28 @@
         <h2>Hard facts vs observations vs model</h2>
         <table>
           <tr><th>Item</th><th>Value</th><th>Grade</th></tr>
-          <tr><td>Americas GMR count</td><td class="n">1,800 (18 × 100)</td><td><span class="grade gA">A</span></td></tr>
+          <tr><td>Americas GMR count</td><td class="n">1,800 (18 Ã— 100)</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>Europe-distributed GMR count</td><td class="n">1,800 (E suffix)</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>Pool A slots per mini-box</td><td class="n">3</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>MSRP</td><td class="n">$34.99</td><td><span class="grade gA">A</span></td></tr>
-          <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays ≈ 17,879</td><td><span class="grade gB">B</span></td></tr>
-          <tr><td>TCGPlayer box market ~3–4 Sep</td><td class="n">$32–41 (June high ~$123)</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays â‰ˆ 17,879</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>TCGPlayer box market ~3â€“4 Sep</td><td class="n">$32â€“41 (June high ~$123)</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>Public Americas GMR serials</td><td class="n">049/100 Dark Magician (country unknown); 052/100 Shining Flare Wingman (United States, listing)</td><td><span class="grade gB">B</span></td></tr>
-          <tr><td>Crowd rips with GMR count (4 Sep)</td><td class="n">~61 boxes, 0 GMR, 3 overframes, 2 starlights</td><td><span class="grade gB">B</span></td></tr>
-          <tr><td>Whatnot OTS-night GMRs</td><td class="n">4 claimed / denominator ~400–600</td><td><span class="grade gC">C</span></td></tr>
-          <tr><td>72h Americas boxes opened</td><td class="n">4k–8k, base 5.5k (content/OTS sensors)</td><td><span class="grade gD">D</span></td></tr>
+          <tr><td>Crowd rips with GMR count (4–5 Sep)</td><td class="n">~178 boxes, 2 GMR (Americas samples), +1 /100E SA map-only</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>Whatnot OTS-night GMRs</td><td class="n">4 claimed / denominator ~400â€“600</td><td><span class="grade gC">C</span></td></tr>
+          <tr><td>72h Americas boxes opened</td><td class="n">4kâ€“8k, base 5.5k (content/OTS sensors)</td><td><span class="grade gD">D</span></td></tr>
           <tr><td>Physical destruction rate</td><td class="n">0.25% of print</td><td><span class="grade gE">E</span></td></tr>
         </table>
       </div>
       <div class="card prose" style="margin-top:12px">
-        <h2>Sensitivity · what moves the conclusion</h2>
-        <p>Largest effects on remaining-chasability (GMRs per 10k accessible sealed): <strong>R posterior</strong> (sample n,k), then <strong>collation</strong> (small at these R), then <strong>closet share</strong> (changes accessible count, not density if random), then <strong>observed hits ≠ expected</strong> (the only thing that changes remaining density without changing R). Opening more boxes at the expected rate does <strong>not</strong> make leftover boxes colder.</p>
+        <h2>Sensitivity Â· what moves the conclusion</h2>
+        <p>Largest effects on remaining-chasability (GMRs per 10k accessible sealed): <strong>R posterior</strong> (sample n,k), then <strong>collation</strong> (small at these R), then <strong>closet share</strong> (changes accessible count, not density if random), then <strong>observed hits â‰  expected</strong> (the only thing that changes remaining density without changing R). Opening more boxes at the expected rate does <strong>not</strong> make leftover boxes colder.</p>
       </div>
     </div>
 
     <p class="foot">
       Not investment advice. Americas only unless tagged. E-suffix excluded from R. Model date 4 Sep 2026.
-      Rebuild of the 180k-as-input dashboard. Prior: log-uniform 100k–600k.
+      Rebuild of the 180k-as-input dashboard. Prior: log-uniform 100kâ€“600k.
     </p>
   </div>
 
@@ -367,20 +367,32 @@
     const EV_NORMAL = 12;
 
     const CROWD = [
-      { country:"Unknown", packs:24, boxes:8, gmr:0, of:null, sl:null },
-      { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0 },
-      { country:"Unknown", packs:30, boxes:10, gmr:0, of:1, sl:null },
-      { country:"United States", packs:12, boxes:4, gmr:0, of:0, sl:1 },
-      { country:"United States", packs:63, boxes:21, gmr:0, of:1, sl:null },
-      { country:"United States", packs:12, boxes:4, gmr:0, of:1, sl:null },
-      { country:"Unknown", packs:4, boxes:4/3, gmr:0, of:0, sl:1 },
-      { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0 },
-      { country:"Unknown", packs:3, boxes:1, gmr:0, of:0, sl:0 }
+      // X thread 4 Sep (country rollup; handles private)
+      { country:"Unknown", packs:24, boxes:8, gmr:0, of:null, sl:null, pool:"Americas" },
+      { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0, pool:"Americas" },
+      { country:"Unknown", packs:30, boxes:10, gmr:0, of:1, sl:null, pool:"Americas" },
+      { country:"United States", packs:12, boxes:4, gmr:0, of:0, sl:1, pool:"Americas" },
+      { country:"United States", packs:63, boxes:21, gmr:0, of:1, sl:null, pool:"Americas" },
+      { country:"United States", packs:12, boxes:4, gmr:0, of:1, sl:null, pool:"Americas" },
+      { country:"Unknown", packs:4, boxes:4/3, gmr:0, of:0, sl:1, pool:"Americas" },
+      { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0, pool:"Americas" },
+      { country:"Unknown", packs:3, boxes:1, gmr:0, of:0, sl:0, pool:"Americas" },
+      // Reddit 2–4 Sep (Americas pool only in likelihood)
+      { country:"Unknown", packs:270, boxes:90, gmr:0, of:null, sl:null, pool:"Americas" },
+      { country:"Unknown", packs:9, boxes:3, gmr:0, of:null, sl:null, pool:"Americas" },
+      { country:"Unknown", packs:12, boxes:4, gmr:1, of:null, sl:null, pool:"Americas" },
+      { country:"Unknown", packs:60, boxes:20, gmr:1, of:null, sl:null, pool:"Americas" }
+      // Note: SA /100E 1-box hit is map-only — not in Americas CROWD
     ];
+    
     const SIGHTINGS = [
       { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"049/100", region:"Americas", country:null, source:"public pull", sold:false },
-      { card:"Favorite HERO Shining Flare Wingman", set:"MAMO-EN004", serial:"052/100", region:"Americas", country:"United States", source:"public listing", sold:false }
+      { card:"Favorite HERO Shining Flare Wingman", set:"MAMO-EN004", serial:"052/100", region:"Americas", country:"United States", source:"public listing", sold:false },
+      { card:"Stardust Dragon - Victim Sanctuary", set:"MAMO-EN003", serial:"77/100", region:"Americas", country:null, source:"public pull", sold:false },
+      { card:"Stargazer Magician", set:"MAMO-EN?", serial:"10/100", region:"Americas", country:null, source:"public pull", sold:false },
+      { card:"Dark Magical Curtain", set:"MAMO-EN002", serial:"006/100E", region:"Europe", country:"South Africa", source:"public pull", sold:false }
     ];
+    
     const COUNTRY_ISO = {
       "United States":840, "Canada":124, "Mexico":484, "Brazil":76, "Argentina":32,
       "Colombia":170, "Chile":152, "Peru":604, "United Kingdom":826, "France":250,
@@ -421,8 +433,8 @@
       }
       return pts[pts.length-1][1];
     }
-    function fmt(n){ if (!isFinite(n)) return "—"; if (Math.abs(n)>=1e6) return (n/1e6).toFixed(2)+"M"; return Math.round(n).toLocaleString("en-US"); }
-    function pct(n,d){ if (!isFinite(n)) return "—"; return (n*100).toFixed(d==null?1:d)+"%"; }
+    function fmt(n){ if (!isFinite(n)) return "â€”"; if (Math.abs(n)>=1e6) return (n/1e6).toFixed(2)+"M"; return Math.round(n).toLocaleString("en-US"); }
+    function pct(n,d){ if (!isFinite(n)) return "â€”"; return (n*100).toFixed(d==null?1:d)+"%"; }
     function money(n){ return "$"+Math.round(n).toLocaleString("en-US"); }
 
     function logGamma(z){
@@ -457,17 +469,17 @@
     }
     function eGmrPerBox(R){ return GMRS/R; }
 
-    function crowdStats(){
-      let boxes=0, packs=0, gmr=0, ofB=0, ofH=0, slB=0, slH=0;
+        function crowdStats(){
+      let packs=0, boxes=0, gmr=0, ofH=0, ofB=0, slH=0, slB=0, n=0;
       for (const r of CROWD){
-        boxes += r.boxes;
-        packs += r.packs;
-        gmr += r.gmr;
-        if (r.of != null){ ofB += r.boxes; ofH += r.of; }
-        if (r.sl != null){ slB += r.boxes; slH += r.sl; }
+        if (r.pool && r.pool!=="Americas") continue; // /100E rips stay out of Americas R
+        packs+=r.packs; boxes+=r.boxes; gmr+=r.gmr; n++;
+        if (r.of!=null){ ofH+=r.of; ofB+=r.boxes; }
+        if (r.sl!=null){ slH+=r.sl; slB+=r.boxes; }
       }
-      return { boxes, packs, gmr, ofB, ofH, slB, slH, nBox: Math.round(boxes) };
+      return { packs, boxes, gmr, ofH, ofB, slH, slB, n, nBox: Math.round(boxes) };
     }
+    
     function syncCrowdSample(){
       const c=crowdStats();
       const s=SAMPLES.find(x=>x.id==="crowd");
@@ -541,15 +553,15 @@
     function gradeWord(post){
       const n=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0);
       if (n<200) return { g:"E", t:"LOW" };
-      if (n<1200) return { g:"D", t:"LOW–MODERATE" };
+      if (n<1200) return { g:"D", t:"LOWâ€“MODERATE" };
       if (n<5000) return { g:"C", t:"MODERATE" };
-      return { g:"C", t:"MODERATE–HIGH" };
+      return { g:"C", t:"MODERATEâ€“HIGH" };
     }
 
     function warnings(post, sn){
       const w=[];
       const active=SAMPLES.filter(s=>s.on);
-      if (!active.length) w.push("No opening samples in the likelihood. Posterior = prior (median ≈ 245k). R is not identified.");
+      if (!active.length) w.push("No opening samples in the likelihood. Posterior = prior (median â‰ˆ 245k). R is not identified.");
       const exp=sn.O*eGmrPerBox(sn.R);
       if (active.length){
         const k=active.reduce((a,s)=>a+s.k,0), n=active.reduce((a,s)=>a+s.n,0);
@@ -557,7 +569,7 @@
         if (Math.abs(impl-sn.R)/sn.R>0.35 && n>=30) w.push("Sample implied R ("+fmt(impl)+") disagrees with posterior median ("+fmt(sn.R)+") by >35%. Check overdispersion or mixed samples.");
       }
       if (sn.O>0 && exp>0){
-        w.push("Internal check: "+fmt(sn.O)+" opened × 1,800 / "+fmt(sn.R)+" ⇒ expected "+fmt(exp)+" GMRs pulled. If you believe true hits are outside ~["+fmt(exp*0.55)+"–"+fmt(exp*1.6)+"], the median print is inconsistent with that belief.");
+        w.push("Internal check: "+fmt(sn.O)+" opened Ã— 1,800 / "+fmt(sn.R)+" â‡’ expected "+fmt(exp)+" GMRs pulled. If you believe true hits are outside ~["+fmt(exp*0.55)+"â€“"+fmt(exp*1.6)+"], the median print is inconsistent with that belief.");
       }
       const slot=pAny(sn.R,"slots"), mx=pAny(sn.R,"max1");
       if (Math.abs(slot-mx)/mx>0.03) w.push("Collation choice moves P(any GMR) by "+pct(Math.abs(slot-mx)/mx)+" at this R.");
@@ -569,20 +581,20 @@
       const conf=gradeWord(post);
       const one=Math.round(1/sn.p);
       document.getElementById("hero").innerHTML=`
-        <div class="card"><h2>Americas print R</h2><div class="val"><em>${fmt(post.median)}</em></div><div class="ci">80% ${fmt(post.q10)}–${fmt(post.q90)} · 95% ${fmt(post.q025)}–${fmt(post.q975)} <span class="grade g${conf.g}">${conf.t}</span></div></div>
-        <div class="card"><h2>P(any GMR) unopened box</h2><div class="val">1 / ${one}</div><div class="ci">${pct(sn.p,2)} · E[GMR/box]=${eGmrPerBox(sn.R).toFixed(4)} <span class="grade gC">C</span></div></div>
-        <div class="card"><h2>P(specific name)</h2><div class="val">1 / ${Math.round(1/pName(sn.R,state.coll))}</div><div class="ci">e.g. Dark Magician · ${pct(pName(sn.R,state.coll),3)}</div></div>
-        <div class="card"><h2>Boxes opened (day ${state.day})</h2><div class="val">${fmt(sn.O)}</div><div class="ci">${pct(sn.O/sn.R)} of median print · path ${state.openPath} <span class="grade gD">D</span></div></div>
-        <div class="card"><h2>GMRs likely pulled</h2><div class="val">${fmt(sn.pulled)}</div><div class="ci">of 1,800 · remaining <em>${fmt(sn.remG)}</em> <span class="grade gC">C</span></div></div>
-        <div class="card"><h2>Remaining sealed density</h2><div class="val">1 / ${Math.round(1/sn.dens)}</div><div class="ci">start 1/${Math.round(1/sn.dens0)} · random ripping ⇒ almost unchanged</div></div>
-        <div class="card"><h2>Accessible-channel GMRs</h2><div class="val">${fmt(sn.gAcc)}</div><div class="ci">closet ${fmt(sn.remG-sn.gAcc)} · channel+unopened ${fmt(sn.acc)} boxes</div></div>
-        <div class="card"><h2>Chase pressure</h2><div class="val">${sn.ch.toFixed(2)}×</div><div class="ci">EV / sealed price ${money(state.boxPx)} <span class="grade gE">E</span> ladder</div></div>
+        <div class="card"><h2>Americas print R</h2><div class="val"><em>${fmt(post.median)}</em></div><div class="ci">80% ${fmt(post.q10)}â€“${fmt(post.q90)} Â· 95% ${fmt(post.q025)}â€“${fmt(post.q975)} <span class="grade g${conf.g}">${conf.t}</span></div></div>
+        <div class="card"><h2>P(any GMR) unopened box</h2><div class="val">1 / ${one}</div><div class="ci">${pct(sn.p,2)} Â· E[GMR/box]=${eGmrPerBox(sn.R).toFixed(4)} <span class="grade gC">C</span></div></div>
+        <div class="card"><h2>P(specific name)</h2><div class="val">1 / ${Math.round(1/pName(sn.R,state.coll))}</div><div class="ci">e.g. Dark Magician Â· ${pct(pName(sn.R,state.coll),3)}</div></div>
+        <div class="card"><h2>Boxes opened (day ${state.day})</h2><div class="val">${fmt(sn.O)}</div><div class="ci">${pct(sn.O/sn.R)} of median print Â· path ${state.openPath} <span class="grade gD">D</span></div></div>
+        <div class="card"><h2>GMRs likely pulled</h2><div class="val">${fmt(sn.pulled)}</div><div class="ci">of 1,800 Â· remaining <em>${fmt(sn.remG)}</em> <span class="grade gC">C</span></div></div>
+        <div class="card"><h2>Remaining sealed density</h2><div class="val">1 / ${Math.round(1/sn.dens)}</div><div class="ci">start 1/${Math.round(1/sn.dens0)} Â· random ripping â‡’ almost unchanged</div></div>
+        <div class="card"><h2>Accessible-channel GMRs</h2><div class="val">${fmt(sn.gAcc)}</div><div class="ci">closet ${fmt(sn.remG-sn.gAcc)} Â· channel+unopened ${fmt(sn.acc)} boxes</div></div>
+        <div class="card"><h2>Chase pressure</h2><div class="val">${sn.ch.toFixed(2)}Ã—</div><div class="ci">EV / sealed price ${money(state.boxPx)} <span class="grade gE">E</span> ladder</div></div>
       `;
       document.getElementById("north").innerHTML=`
         <div>
-          <h2>North star · GMRs remaining per 10,000 accessible sealed mini-boxes</h2>
+          <h2>North star Â· GMRs remaining per 10,000 accessible sealed mini-boxes</h2>
           <div class="val"><em>${sn.per10k.toFixed(1)}</em></div>
-          <div class="ci">Accessible = channel + consumer unopened, not closet, not destroyed. If random, this tracks 10,000 × 1,800 / R and does <strong>not</strong> fall just because packs were opened.</div>
+          <div class="ci">Accessible = channel + consumer unopened, not closet, not destroyed. If random, this tracks 10,000 Ã— 1,800 / R and does <strong>not</strong> fall just because packs were opened.</div>
         </div>
         <div>
           <div class="bar" style="height:22px;margin-bottom:8px">
@@ -592,8 +604,8 @@
             <i style="width:${pct(sn.L/sn.R)};background:#6b8fbf"></i>
             <i style="width:${pct(sn.D/sn.R)};background:#5c5348"></i>
           </div>
-          <div class="ci">gold opened · green channel · stone unopened · blue closet · brown destroyed</div>
-          <div class="ci" style="margin-top:8px">Confidence in R: <span class="grade g${conf.g}">${conf.t}</span> · effective sample n=${SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0)}</div>
+          <div class="ci">gold opened Â· green channel Â· stone unopened Â· blue closet Â· brown destroyed</div>
+          <div class="ci" style="margin-top:8px">Confidence in R: <span class="grade g${conf.g}">${conf.t}</span> Â· effective sample n=${SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0)}</div>
         </div>
       `;
     }
@@ -617,8 +629,8 @@
           <tr><td>Opened (pulled)</td><td class="n">${fmt(sn.O)}</td><td class="n">${fmt(sn.pulled)}</td></tr>
           <tr><td>Physically destroyed</td><td class="n">${fmt(sn.D)}</td><td class="n">${fmt(GMRS*(sn.D/sn.R))}</td></tr>
         </table>
-        <div class="formula">remaining_density = (1800 − pulled) / (R − opened − destroyed)
-≈ 1800/R when hits match expectation</div>
+        <div class="formula">remaining_density = (1800 âˆ’ pulled) / (R âˆ’ opened âˆ’ destroyed)
+â‰ˆ 1800/R when hits match expectation</div>
       `;
     }
 
@@ -658,7 +670,7 @@
       const n=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0);
       const k=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.k,0);
       document.getElementById("postNote").innerHTML=
-        `Median ${fmt(post.median)} · 80% [${fmt(post.q10)}, ${fmt(post.q90)}] · 95% [${fmt(post.q025)}, ${fmt(post.q975)}]. `+
+        `Median ${fmt(post.median)} Â· 80% [${fmt(post.q10)}, ${fmt(post.q90)}] Â· 95% [${fmt(post.q025)}, ${fmt(post.q975)}]. `+
         (n?`Likelihood uses ${k} GMR / ${n} boxes.`:`Prior only.`)+
         ` Slot vs max-1 P(any) at median: ${pct(pAny(post.median,"slots"),3)} vs ${pct(pAny(post.median,"max1"),3)}.`;
     }
@@ -707,7 +719,7 @@
       const unk=document.getElementById("mapUnk");
       const loc=serialsByCountry();
       unk.textContent = loc.unknown
-        ? loc.unknown+" serial"+(loc.unknown===1?"":"s")+" · country unknown (not plotted)"
+        ? loc.unknown+" serial"+(loc.unknown===1?"":"s")+" Â· country unknown (not plotted)"
         : "All mapped serials have a country";
       if (typeof d3==="undefined" || typeof topojson==="undefined"){
         svgEl.innerHTML=`<text x="500" y="240" fill="#9a8f7c" text-anchor="middle" font-size="14">Map library failed to load</text>`;
@@ -733,7 +745,7 @@
           .text(d=>{
             const name=ISO_NAME[String(d.id)]||("ISO "+d.id);
             const row=loc.by[name];
-            return row ? (name+" · "+row.n+" GMR") : name;
+            return row ? (name+" Â· "+row.n+" GMR") : name;
           });
         Object.values(loc.by).forEach(row=>{
           const iso=COUNTRY_ISO[row.country];
@@ -745,7 +757,7 @@
             .attr("fill","#d4b45a").attr("stroke","#0b0a09").attr("stroke-width",1.2);
           svg.append("text").attr("x",x+10).attr("y",y+4)
             .attr("fill","#e8e0d4").attr("font-size",11).attr("font-family","IBM Plex Mono")
-            .text(row.country+" · "+row.n);
+            .text(row.country+" Â· "+row.n);
         });
       };
       if (WORLD){ renderTopo(WORLD); return; }
@@ -758,10 +770,10 @@
     function renderCrowd(){
       const c=syncCrowdSample();
       document.getElementById("crowdKpis").innerHTML=`
-        <div class="card"><h2>Reported mini-boxes</h2><div class="val">${c.boxes.toFixed(1)}</div><div class="ci">${c.packs} packs · 3 packs = 1 box</div></div>
-        <div class="card"><h2>GMRs in those rips</h2><div class="val">${c.gmr}</div><div class="ci">0 / ${c.nBox} enters likelihood as sample “crowd”</div></div>
-        <div class="card"><h2>Overframes (UR full art)</h2><div class="val">${c.ofH}</div><div class="ci">${c.ofB? ("1 / "+(c.ofB/Math.max(c.ofH,1e-9)).toFixed(1)+" boxes among reporters"):"n too small"} · not GMR</div></div>
-        <div class="card"><h2>Starlights</h2><div class="val">${c.slH}</div><div class="ci">${c.slB? ("1 / "+(c.slB/Math.max(c.slH,1e-9)).toFixed(1)+" boxes among reporters"):"—"}</div></div>
+        <div class="card"><h2>Reported mini-boxes</h2><div class="val">${c.boxes.toFixed(1)}</div><div class="ci">${c.packs} packs Â· 3 packs = 1 box</div></div>
+        <div class="card"><h2>GMRs in those rips</h2><div class="val">${c.gmr}</div><div class="ci">0 / ${c.nBox} enters likelihood as sample â€œcrowdâ€</div></div>
+        <div class="card"><h2>Overframes (UR full art)</h2><div class="val">${c.ofH}</div><div class="ci">${c.ofB? ("1 / "+(c.ofB/Math.max(c.ofH,1e-9)).toFixed(1)+" boxes among reporters"):"n too small"} Â· not GMR</div></div>
+        <div class="card"><h2>Starlights</h2><div class="val">${c.slH}</div><div class="ci">${c.slB? ("1 / "+(c.slB/Math.max(c.slH,1e-9)).toFixed(1)+" boxes among reporters"):"â€”"}</div></div>
       `;
       const rows=countryRipRows();
       document.getElementById("crowdTable").innerHTML=`<tr><th>Country</th><th>Reports</th><th>Boxes</th><th>Packs</th><th>GMR</th><th>OF</th><th>SL</th></tr>`+
@@ -771,8 +783,8 @@
           <td class="n">${r.boxes%1? r.boxes.toFixed(1): r.boxes}</td>
           <td class="n">${r.packs}</td>
           <td class="n">${r.gmr}</td>
-          <td class="n">${r.of==null||r.ofB===0?"—":r.ofH}</td>
-          <td class="n">${r.sl==null||r.slB===0?"—":r.slH}</td>
+          <td class="n">${r.of==null||r.ofB===0?"â€”":r.ofH}</td>
+          <td class="n">${r.sl==null||r.slB===0?"â€”":r.slH}</td>
         </tr>`).join("");
       document.getElementById("regTable").innerHTML=`<tr><th>Card</th><th>Serial</th><th>Print region</th><th>Country</th><th>Sold?</th></tr>`+
         SIGHTINGS.map(s=>`<tr>
@@ -877,17 +889,17 @@
       const ev=chaseEV(post.median);
       document.getElementById("chaseCard").innerHTML=`
         <h2>Chase Pressure Index</h2>
-        <div class="val"><em>${ev.pressure.toFixed(2)}×</em></div>
+        <div class="val"><em>${ev.pressure.toFixed(2)}Ã—</em></div>
         <div class="ci">net EV ${money(ev.net)} / box ${money(state.boxPx)}</div>
         <div class="formula">
-          EV_GMR = (100 / R) × Σ Vᵢ = ${money(ev.gmr)}<br>
-          EV_normal ≈ ${money(EV_NORMAL)} (UR/Secret floor, grade C)<br>
-          EV_net = EV_GMR×(1−friction)+EV_normal = ${money(ev.net)}<br>
+          EV_GMR = (100 / R) Ã— Î£ Váµ¢ = ${money(ev.gmr)}<br>
+          EV_normal â‰ˆ ${money(EV_NORMAL)} (UR/Secret floor, grade C)<br>
+          EV_net = EV_GMRÃ—(1âˆ’friction)+EV_normal = ${money(ev.net)}<br>
           Pressure = EV_net / sealed_price
         </div>
-        <p class="ci" style="margin-top:10px">A $12k Dark Magician sold raises ΣV, therefore pressure, without a hand-set 1.20 multiplier. Pressure &gt; 1 does not mean +EV after variance — it means the ticket feels hotter. <span class="grade gE">E</span> until English solds exist.</p>
+        <p class="ci" style="margin-top:10px">A $12k Dark Magician sold raises Î£V, therefore pressure, without a hand-set 1.20 multiplier. Pressure &gt; 1 does not mean +EV after variance â€” it means the ticket feels hotter. <span class="grade gE">E</span> until English solds exist.</p>
       `;
-      document.getElementById("ladderTable").innerHTML=`<tr><th>Card</th><th>Tier</th><th>Vᵢ</th></tr>`+
+      document.getElementById("ladderTable").innerHTML=`<tr><th>Card</th><th>Tier</th><th>Váµ¢</th></tr>`+
         values().map(c=>`<tr><td>${c.name}</td><td>${c.tier}</td><td class="n">${c.v?money(c.v):"$0"}</td></tr>`).join("");
     }
 
