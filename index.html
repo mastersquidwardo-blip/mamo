@@ -313,7 +313,7 @@
           <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays a 17,879</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>TCGPlayer box market ~3-4 Sep</td><td class="n">$32-41 (June high ~$123)</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>Public Americas GMR serials</td><td class="n">049/100 Dark Magician (country unknown); 052/100 Shining Flare Wingman (United States, listing)</td><td><span class="grade gB">B</span></td></tr>
-          <tr><td>Crowd rips with GMR count (4-5 Sep)</td><td class="n">~178 boxes, 2 GMR (Americas samples), +1 /100E SA map-only</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>Crowd rips with GMR count (5 Sep)</td><td class="n">~280 boxes, 3 GMR (Americas likelihood)</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>Whatnot OTS-night GMRs</td><td class="n">4 claimed / denominator ~400-600</td><td><span class="grade gC">C</span></td></tr>
           <tr><td>72h Americas boxes opened</td><td class="n">4k-8k, base 5.5k (content/OTS sensors)</td><td><span class="grade gD">D</span></td></tr>
           <tr><td>Physical destruction rate</td><td class="n">0.25% of print</td><td><span class="grade gE">E</span></td></tr>
@@ -367,7 +367,6 @@
     const EV_NORMAL = 12;
 
     const CROWD = [
-      // X thread 4 Sep (country rollup; handles private)
       { country:"Unknown", packs:24, boxes:8, gmr:0, of:null, sl:null, pool:"Americas" },
       { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0, pool:"Americas" },
       { country:"Unknown", packs:30, boxes:10, gmr:0, of:1, sl:null, pool:"Americas" },
@@ -377,12 +376,18 @@
       { country:"Unknown", packs:4, boxes:4/3, gmr:0, of:0, sl:1, pool:"Americas" },
       { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0, pool:"Americas" },
       { country:"Unknown", packs:3, boxes:1, gmr:0, of:0, sl:0, pool:"Americas" },
-      // Reddit 2-4 Sep (Americas pool only in likelihood)
+      { country:"United States", packs:6, boxes:2, gmr:0, of:0, sl:0, pool:"Americas" },
+      { country:"United States", packs:30, boxes:10, gmr:0, of:1, sl:0, pool:"Americas" },
+      { country:"Unknown", packs:36, boxes:12, gmr:0, of:0, sl:0, pool:"Americas" },
+      { country:"Mexico", packs:3, boxes:1, gmr:1, of:null, sl:0, pool:"Americas" },
+      { country:"Canada", packs:150, boxes:50, gmr:0, of:2, sl:7, pool:"Americas" },
+      { country:"United States", packs:45, boxes:15, gmr:0, of:2, sl:0, pool:"Americas" },
+      { country:"United States", packs:6, boxes:2, gmr:0, of:null, sl:0, pool:"Americas" },
+      { country:"Unknown", packs:30, boxes:10, gmr:0, of:0, sl:0, pool:"Americas" },
       { country:"Unknown", packs:270, boxes:90, gmr:0, of:null, sl:null, pool:"Americas" },
       { country:"Unknown", packs:9, boxes:3, gmr:0, of:null, sl:null, pool:"Americas" },
       { country:"Unknown", packs:12, boxes:4, gmr:1, of:null, sl:null, pool:"Americas" },
       { country:"Unknown", packs:60, boxes:20, gmr:1, of:null, sl:null, pool:"Americas" }
-      // Note: SA /100E 1-box hit is map-only - not in Americas CROWD
     ];
     
     const SIGHTINGS = [
@@ -483,7 +488,7 @@
     function syncCrowdSample(){
       const c=crowdStats();
       const s=SAMPLES.find(x=>x.id==="crowd");
-      if (s){ s.n=c.nBox; s.k=c.gmr; s.note=`Crowdsource 4-5 Sep: ${c.nBox} boxes, ${c.gmr} GMR, ${c.ofH} OF / ${c.ofB.toFixed(1)} boxes, ${c.slH} SL / ${c.slB.toFixed(1)} boxes.`; }
+      if (s){ s.n=c.nBox; s.k=c.gmr; s.note=`Crowdsource 5 Sep: ${c.nBox} boxes, ${c.gmr} GMR, ${c.ofH} OF / ${c.ofB.toFixed(1)} boxes, ${c.slH} SL / ${c.slB.toFixed(1)} boxes.`; }
       return c;
     }
 
