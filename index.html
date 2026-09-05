@@ -78,6 +78,9 @@
     .formula { font-family:"IBM Plex Mono",monospace; font-size:11px; line-height:1.65; background:#0e0c0a; border:1px solid var(--line); border-radius:6px; padding:10px 12px; color:#c9b896; margin-top:8px; }
     .bar { display:flex; height:16px; border-radius:4px; overflow:hidden; background:#0e0c0a; }
     .bar i { display:block; height:100%; }
+    .map-wrap { background:#0e0c0a; border-radius:8px; overflow:hidden; position:relative; }
+    #gmrMap { width:100%; height:440px; display:block; }
+    .map-unk { position:absolute; left:12px; bottom:12px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); background:#12100ecc; padding:8px 10px; border-radius:6px; border:1px solid var(--line); }
     .two { grid-template-columns:1.15fr .85fr; }
     .three { grid-template-columns:1fr 1fr 1fr; }
     .foot { margin-top:20px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--dim); line-height:1.5; }
@@ -172,23 +175,23 @@
     <div class="panel" id="p-crowd">
       <div class="grid hero" id="crowdKpis"></div>
       <div class="card" style="margin-top:12px">
-        <h2>Crowdsourced rips · @Kramaramb thread 4 Sep 2026</h2>
-        <p class="ci" style="margin-bottom:8px">Self-reported. Overframe = extended-art UR, not GMR. Packs converted at 3 packs = 1 mini-box. Include in R likelihood via the crowd sample toggle on Print inference (on by default).</p>
-        <table id="crowdTable"></table>
+        <h2>Serialized GMR locations · country only</h2>
+        <p class="ci" style="margin-bottom:8px">Hard rule: no names, no cities. E-suffix = Europe-distributed, plotted separately from Americas. Unknown country is not placed on the map.</p>
+        <div class="map-wrap">
+          <svg id="gmrMap" viewBox="0 0 1000 480"></svg>
+          <div class="map-unk" id="mapUnk"></div>
+        </div>
       </div>
       <div class="grid two" style="margin-top:12px">
         <div class="card">
-          <h2>Americas GMR serial registry · deduped</h2>
-          <table id="regTable"></table>
-          <p class="ci" style="margin-top:8px">Listings and pull posts without a box denominator do not enter the print-run likelihood.</p>
+          <h2>Reported rips by country</h2>
+          <p class="ci" style="margin-bottom:8px">Anonymous. City/state rolled up to country. Overframe = UR full art, not GMR.</p>
+          <table id="crowdTable"></table>
         </div>
-        <div class="card prose">
-          <h2>Call for data</h2>
-          <p>Location is only for collation / hotspot checks. E-suffix cards are Europe-distributed and stay out of Americas R.</p>
-          <div class="formula">
-            Share: packs ripped · starlights · overframes · GMRs · region<br>
-            1 mini-box = 3 packs + 3 bonus Secrets
-          </div>
+        <div class="card">
+          <h2>Serial registry · country</h2>
+          <table id="regTable"></table>
+          <p class="ci" style="margin-top:8px">No box denominator → not in print-run likelihood.</p>
         </div>
       </div>
     </div>
@@ -309,7 +312,7 @@
           <tr><td>MSRP</td><td class="n">$34.99</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays ≈ 17,879</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>TCGPlayer box market ~3–4 Sep</td><td class="n">$32–41 (June high ~$123)</td><td><span class="grade gB">B</span></td></tr>
-          <tr><td>Public Americas GMR serials</td><td class="n">049/100 Dark Magician; 052/100 Shining Flare Wingman (Temple City, CA, eBay)</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>Public Americas GMR serials</td><td class="n">049/100 Dark Magician (country unknown); 052/100 Shining Flare Wingman (United States, listing)</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>Crowd rips with GMR count (4 Sep)</td><td class="n">~61 boxes, 0 GMR, 3 overframes, 2 starlights</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>Whatnot OTS-night GMRs</td><td class="n">4 claimed / denominator ~400–600</td><td><span class="grade gC">C</span></td></tr>
           <tr><td>72h Americas boxes opened</td><td class="n">4k–8k, base 5.5k (content/OTS sensors)</td><td><span class="grade gD">D</span></td></tr>
@@ -328,6 +331,8 @@
     </p>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script>
     const GMRS = 1800, COPIES = 100, SLOTS = 3, TODAY0 = 2, HORIZON = 90;
     const RMIN = 100000, RMAX = 600000, RSTEP = 5000;
@@ -362,23 +367,29 @@
     const EV_NORMAL = 12;
 
     const CROWD = [
-      { who:"maya_jillian75", packs:24, boxes:8, gmr:0, of:null, sl:null, geo:"unknown", note:"8 boxes, no GMR. OF/SL not reported." },
-      { who:"poketeejay", packs:18, boxes:6, gmr:0, of:0, sl:0, geo:"unknown", note:"Six mini boxes, no full art or starlight." },
-      { who:"ruxin34", packs:30, boxes:10, gmr:0, of:1, sl:null, geo:"unknown", note:"1 display (10 boxes), 1 overframe. Overframe ≠ GMR." },
-      { who:"JohnWindschauer", packs:12, boxes:4, gmr:0, of:0, sl:1, slName:"S:P Little Knight", geo:"Florida", note:"4 boxes, 1 starlight, 0 GMR." },
-      { who:"bybriangoins", packs:63, boxes:21, gmr:0, of:1, sl:null, geo:"Nashville", note:"21 boxes, 1 ultra overframe." },
-      { who:"pwrlvllemillion", packs:12, boxes:4, gmr:0, of:1, sl:null, geo:"Dallas", note:"4 boxes, Dark Magician overframe (UR full art, not GMR)." },
-      { who:"scusemepls", packs:4, boxes:4/3, gmr:0, of:0, sl:1, slName:"Ruler of the End", geo:"unknown", note:"4 packs (not boxes), 1 starlight." },
-      { who:"dooddoodly", packs:18, boxes:6, gmr:0, of:0, sl:0, geo:"unknown", note:"6 boxes, zero overframe, zero starlight." },
-      { who:"duskrei", packs:3, boxes:1, gmr:0, of:0, sl:0, geo:"unknown", note:"3 packs, 0/0/0." }
+      { country:"Unknown", packs:24, boxes:8, gmr:0, of:null, sl:null },
+      { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0 },
+      { country:"Unknown", packs:30, boxes:10, gmr:0, of:1, sl:null },
+      { country:"United States", packs:12, boxes:4, gmr:0, of:0, sl:1 },
+      { country:"United States", packs:63, boxes:21, gmr:0, of:1, sl:null },
+      { country:"United States", packs:12, boxes:4, gmr:0, of:1, sl:null },
+      { country:"Unknown", packs:4, boxes:4/3, gmr:0, of:0, sl:1 },
+      { country:"Unknown", packs:18, boxes:6, gmr:0, of:0, sl:0 },
+      { country:"Unknown", packs:3, boxes:1, gmr:0, of:0, sl:0 }
     ];
     const SIGHTINGS = [
-      { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"049/100", region:"Americas", geo:"unknown", source:"X / Reddit public pull", sold:false },
-      { card:"Favorite HERO Shining Flare Wingman", set:"MAMO-EN004", serial:"052/100", region:"Americas", geo:"Temple City, CA", source:"eBay listing (ask, not sold)", sold:false }
+      { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"049/100", region:"Americas", country:null, source:"public pull", sold:false },
+      { card:"Favorite HERO Shining Flare Wingman", set:"MAMO-EN004", serial:"052/100", region:"Americas", country:"United States", source:"public listing", sold:false }
     ];
+    const COUNTRY_ISO = {
+      "United States":840, "Canada":124, "Mexico":484, "Brazil":76, "Argentina":32,
+      "Colombia":170, "Chile":152, "Peru":604, "United Kingdom":826, "France":250,
+      "Germany":276, "Spain":724, "Italy":380, "Netherlands":528, "Australia":36, "Japan":392
+    };
+    const ISO_NAME = Object.fromEntries(Object.entries(COUNTRY_ISO).map(([k,v])=>[String(v),k]));
     const SAMPLES = [
       { id: "crowd", on: true, n: 0, k: 0, region: "US", grade: "B", overdisp: true,
-        note: "Kramaramb crowdsource 4 Sep. Line items on Crowd tab. 0 GMR in reported rips." },
+        note: "Crowdsource 4 Sep, anonymous country rollup. 0 GMR in reported rips." },
       { id: "content", on: true, n: 550, k: 4, region: "US", grade: "C", overdisp: true,
         note: "OTS-week content/Whatnot: ~4 GMRs vs ~550 documented boxes. Weak denominator." },
       { id: "hunt50", on: false, n: 50, k: 0, region: "US", grade: "B", overdisp: false,
@@ -666,33 +677,112 @@
       });
     }
 
+    function countryRipRows(){
+      const m={};
+      for (const r of CROWD){
+        const k=r.country||"Unknown";
+        if (!m[k]) m[k]={ country:k, boxes:0, packs:0, gmr:0, ofB:0, ofH:0, slB:0, slH:0, n:0 };
+        const row=m[k];
+        row.boxes+=r.boxes; row.packs+=r.packs; row.gmr+=r.gmr; row.n+=1;
+        if (r.of!=null){ row.ofB+=r.boxes; row.ofH+=r.of; }
+        if (r.sl!=null){ row.slB+=r.boxes; row.slH+=r.sl; }
+      }
+      return Object.values(m).sort((a,b)=>b.boxes-a.boxes);
+    }
+    function serialsByCountry(){
+      const m={};
+      let unknown=0;
+      for (const s of SIGHTINGS){
+        if (!s.country){ unknown++; continue; }
+        if (!m[s.country]) m[s.country]={ country:s.country, n:0, serials:[] };
+        m[s.country].n++;
+        m[s.country].serials.push(s);
+      }
+      return { by:m, unknown };
+    }
+
+    let WORLD=null, MAP_DRAWN=false;
+    function drawGmrMap(){
+      const svgEl=document.getElementById("gmrMap");
+      const unk=document.getElementById("mapUnk");
+      const loc=serialsByCountry();
+      unk.textContent = loc.unknown
+        ? loc.unknown+" serial"+(loc.unknown===1?"":"s")+" · country unknown (not plotted)"
+        : "All mapped serials have a country";
+      if (typeof d3==="undefined" || typeof topojson==="undefined"){
+        svgEl.innerHTML=`<text x="500" y="240" fill="#9a8f7c" text-anchor="middle" font-size="14">Map library failed to load</text>`;
+        return;
+      }
+      const hitIso=new Set(Object.keys(loc.by).map(c=>String(COUNTRY_ISO[c])).filter(Boolean));
+      const renderTopo=world=>{
+        const land=topojson.feature(world, world.objects.countries);
+        const projection=d3.geoNaturalEarth1().fitExtent([[16,16],[984,464]], {type:"Sphere"});
+        const path=d3.geoPath(projection);
+        const svg=d3.select(svgEl);
+        svg.selectAll("*").remove();
+        svg.append("path").datum({type:"Sphere"}).attr("d", path).attr("fill","#0e0c0a").attr("stroke","#2a241c");
+        svg.selectAll("path.land")
+          .data(land.features)
+          .join("path")
+          .attr("class", d=> hitIso.has(String(d.id)) ? "land hit" : "land")
+          .attr("d", path)
+          .attr("fill", d=> hitIso.has(String(d.id)) ? "#c9a24a" : "#1c1814")
+          .attr("stroke", d=> hitIso.has(String(d.id)) ? "#e8d090" : "#2a241c")
+          .attr("stroke-width", 0.5)
+          .append("title")
+          .text(d=>{
+            const name=ISO_NAME[String(d.id)]||("ISO "+d.id);
+            const row=loc.by[name];
+            return row ? (name+" · "+row.n+" GMR") : name;
+          });
+        Object.values(loc.by).forEach(row=>{
+          const iso=COUNTRY_ISO[row.country];
+          if (!iso) return;
+          const feat=land.features.find(f=>String(f.id)===String(iso));
+          if (!feat) return;
+          const [x,y]=projection(d3.geoCentroid(feat));
+          svg.append("circle").attr("cx",x).attr("cy",y).attr("r", 6+2*row.n)
+            .attr("fill","#d4b45a").attr("stroke","#0b0a09").attr("stroke-width",1.2);
+          svg.append("text").attr("x",x+10).attr("y",y+4)
+            .attr("fill","#e8e0d4").attr("font-size",11).attr("font-family","IBM Plex Mono")
+            .text(row.country+" · "+row.n);
+        });
+      };
+      if (WORLD){ renderTopo(WORLD); return; }
+      fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+        .then(r=>r.json())
+        .then(world=>{ WORLD=world; renderTopo(world); })
+        .catch(()=>{ svgEl.innerHTML=`<text x="500" y="240" fill="#9a8f7c" text-anchor="middle" font-size="14">Could not load country geometries</text>`; });
+    }
+
     function renderCrowd(){
       const c=syncCrowdSample();
-      const ofRate=c.ofB? c.ofH/c.ofB : NaN;
-      const slRate=c.slB? c.slH/c.slB : NaN;
       document.getElementById("crowdKpis").innerHTML=`
         <div class="card"><h2>Reported mini-boxes</h2><div class="val">${c.boxes.toFixed(1)}</div><div class="ci">${c.packs} packs · 3 packs = 1 box</div></div>
         <div class="card"><h2>GMRs in those rips</h2><div class="val">${c.gmr}</div><div class="ci">0 / ${c.nBox} enters likelihood as sample “crowd”</div></div>
         <div class="card"><h2>Overframes (UR full art)</h2><div class="val">${c.ofH}</div><div class="ci">${c.ofB? ("1 / "+(c.ofB/Math.max(c.ofH,1e-9)).toFixed(1)+" boxes among reporters"):"n too small"} · not GMR</div></div>
         <div class="card"><h2>Starlights</h2><div class="val">${c.slH}</div><div class="ci">${c.slB? ("1 / "+(c.slB/Math.max(c.slH,1e-9)).toFixed(1)+" boxes among reporters"):"—"}</div></div>
       `;
-      document.getElementById("crowdTable").innerHTML=`<tr><th>Who</th><th>Geo</th><th>Boxes</th><th>Packs</th><th>GMR</th><th>OF</th><th>SL</th><th>Note</th></tr>`+
-        CROWD.map(r=>`<tr>
-          <td>${r.who}</td><td>${r.geo}</td>
-          <td class="n">${r.boxes%1? r.boxes.toFixed(2): r.boxes}</td>
+      const rows=countryRipRows();
+      document.getElementById("crowdTable").innerHTML=`<tr><th>Country</th><th>Reports</th><th>Boxes</th><th>Packs</th><th>GMR</th><th>OF</th><th>SL</th></tr>`+
+        rows.map(r=>`<tr>
+          <td>${r.country}</td>
+          <td class="n">${r.n}</td>
+          <td class="n">${r.boxes%1? r.boxes.toFixed(1): r.boxes}</td>
           <td class="n">${r.packs}</td>
           <td class="n">${r.gmr}</td>
-          <td class="n">${r.of==null?"—":r.of}</td>
-          <td class="n">${r.sl==null?"—":r.sl}${r.slName?" ("+r.slName+")":""}</td>
-          <td>${r.note}</td>
+          <td class="n">${r.of==null||r.ofB===0?"—":r.ofH}</td>
+          <td class="n">${r.sl==null||r.slB===0?"—":r.slH}</td>
         </tr>`).join("");
-      document.getElementById("regTable").innerHTML=`<tr><th>Card</th><th>Serial</th><th>Region</th><th>Geo</th><th>Source</th><th>Sold?</th></tr>`+
+      document.getElementById("regTable").innerHTML=`<tr><th>Card</th><th>Serial</th><th>Print region</th><th>Country</th><th>Sold?</th></tr>`+
         SIGHTINGS.map(s=>`<tr>
           <td>${s.card}<div class="ci">${s.set}</div></td>
           <td class="n">${s.serial}</td>
-          <td>${s.region}</td><td>${s.geo}</td><td>${s.source}</td>
-          <td>${s.sold?"yes":"no / listing"}</td>
+          <td>${s.region}</td>
+          <td>${s.country||"Unknown"}</td>
+          <td>${s.sold?"yes":"no"}</td>
         </tr>`).join("");
+      drawGmrMap();
     }
 
     function simStates(R){
