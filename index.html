@@ -114,6 +114,11 @@
     <!-- OVERVIEW -->
     <div class="panel on" id="p-overview">
       <div class="grid hero" id="hero"></div>
+      <div class="card" style="margin-top:12px">
+        <h2>Americas observed pull rates  |  crowd log</h2>
+        <p class="ci" style="margin-bottom:10px">North America distribution sample (Americas pool: US/CA/MX + unknown). Case = 4 displays = 40 mini-boxes. Large case opens dominate. Not the same as inferred 1/R from the posterior.</p>
+        <div class="grid hero" id="naRates"></div>
+      </div>
       <div class="card north" style="margin-top:12px" id="north"></div>
       <div class="grid two" style="margin-top:12px">
         <div class="card">
@@ -634,6 +639,22 @@
     }
 
     /* ----- render ----- */
+    
+    function renderNaRates(){
+      const c=crowdStats();
+      const gmrRate = c.gmr>0 ? (c.boxes/c.gmr) : null;
+      const ofRate = c.ofH>0 ? (c.ofB/c.ofH) : null;
+      const slRate = c.slH>0 ? (c.slB/c.slH) : null;
+      const el=document.getElementById("naRates");
+      if (!el) return;
+      el.innerHTML=`
+        <div class="card"><h2>Crowd sample</h2><div class="val">${c.nBox.toLocaleString()}</div><div class="ci">mini-boxes  |  ${c.n} reports  |  ${c.packs.toLocaleString()} packs</div></div>
+        <div class="card"><h2>GMR hit rate</h2><div class="val">${gmrRate? ("1 / "+Math.round(gmrRate)) : "-" }</div><div class="ci">${c.gmr} GMR in sample  |  ${gmrRate? (gmrRate.toFixed(0)+" boxes per GMR") : "no GMR yet"} <span class="grade gB">B</span></div></div>
+        <div class="card"><h2>Overframe rate</h2><div class="val">${ofRate? ("1 / "+ofRate.toFixed(0)) : "-" }</div><div class="ci">${c.ofH} OF in ${c.ofB.toFixed(0)} boxes w/ OF data  |  UR full art, not GMR <span class="grade gB">B</span></div></div>
+        <div class="card"><h2>Starlight rate</h2><div class="val">${slRate? ("1 / "+slRate.toFixed(0)) : "-" }</div><div class="ci">${c.slH} SL in ${c.slB.toFixed(0)} boxes w/ SL data <span class="grade gB">B</span></div></div>
+      `;
+    }
+
     function renderHero(post, sn){
       const conf=gradeWord(post);
       const one=Math.round(1/sn.p);
@@ -870,9 +891,9 @@ a 1800/R when hits match expectation</div>
       const c=syncCrowdSample();
       document.getElementById("crowdKpis").innerHTML=`
         <div class="card"><h2>Reported mini-boxes</h2><div class="val">${c.boxes.toFixed(1)}</div><div class="ci">${c.packs} packs  |  3 packs = 1 box</div></div>
-        <div class="card"><h2>GMRs in those rips</h2><div class="val">${c.gmr}</div><div class="ci">0 / ${c.nBox} enters likelihood as sample acrowda</div></div>
-        <div class="card"><h2>Overframes (UR full art)</h2><div class="val">${c.ofH}</div><div class="ci">${c.ofB? ("1 / "+(c.ofB/Math.max(c.ofH,1e-9)).toFixed(1)+" boxes among reporters"):"n too small"}  |  not GMR</div></div>
-        <div class="card"><h2>Starlights</h2><div class="val">${c.slH}</div><div class="ci">${c.slB? ("1 / "+(c.slB/Math.max(c.slH,1e-9)).toFixed(1)+" boxes among reporters"):"-"}</div></div>
+        <div class="card"><h2>GMRs in those rips</h2><div class="val">${c.gmr}</div><div class="ci">1 / ${c.gmr? (c.boxes/c.gmr).toFixed(0) : "-"} boxes  |  enters likelihood as crowd sample</div></div>
+        <div class="card"><h2>Overframes (UR full art)</h2><div class="val">${c.ofH}</div><div class="ci">${c.ofB? ("1 / "+(c.ofB/Math.max(c.ofH,1e-9)).toFixed(0)+" boxes among reporters"):"n too small"}  |  not GMR</div></div>
+        <div class="card"><h2>Starlights</h2><div class="val">${c.slH}</div><div class="ci">${c.slB? ("1 / "+(c.slB/Math.max(c.slH,1e-9)).toFixed(0)+" boxes among reporters"):"-"}</div></div>
       `;
       const rows=countryRipRows();
       document.getElementById("crowdTable").innerHTML=`<tr><th>Country</th><th>Reports</th><th>Boxes</th><th>Packs</th><th>GMR</th><th>OF</th><th>SL</th></tr>`+
@@ -1007,6 +1028,7 @@ a 1800/R when hits match expectation</div>
       const sn=snapshot(post);
       renderWarn(post,sn);
       renderHero(post,sn);
+      renderNaRates();
       renderWhere(sn);
       renderPost(post);
       renderSamples();
