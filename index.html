@@ -176,7 +176,7 @@
       <div class="grid hero" id="crowdKpis"></div>
       <div class="card" style="margin-top:12px">
         <h2>Serialized GMR locations  |  country only</h2>
-        <p class="ci" style="margin-bottom:8px">Hard rule: no names, no cities. USA plots as West Coast / South / Midwest / Southeast / Northeast when known. E-suffix = Europe-distributed. Unknown country plots on Antarctica.</p>
+        <p class="ci" style="margin-bottom:8px">Hard rule: no names, no cities. USA plots as West Coast / South / Midwest / Southeast / Northeast when known. /100E is the E print mark; Oceania (e.g. Australia) is its own print region on the map. Unknown country plots at Antarctica labeled location unconfirmed.</p>
         <div class="map-wrap">
           <svg id="gmrMap" viewBox="0 0 1000 480"></svg>
           <div class="map-unk" id="mapUnk"></div>
@@ -392,9 +392,9 @@
     ];
     
     const SIGHTINGS = [
-      { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"049/100", region:"Americas", country:"Antarctica", source:"public pull", sold:false },
-      { card:"Stardust Dragon - Victim Sanctuary", set:"MAMO-EN007", serial:"077/100", region:"Americas", country:"Antarctica", source:"public pull", sold:false },
-      { card:"Horoscope Sorcerer, the Stargazer Magician", set:"MAMO-EN014", serial:"010/100", region:"Americas", country:"Antarctica", source:"public pull", sold:false },
+      { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"049/100", region:"Americas", country:"location unconfirmed", source:"public pull", sold:false },
+      { card:"Stardust Dragon - Victim Sanctuary", set:"MAMO-EN007", serial:"077/100", region:"Americas", country:"location unconfirmed", source:"public pull", sold:false },
+      { card:"Horoscope Sorcerer, the Stargazer Magician", set:"MAMO-EN014", serial:"010/100", region:"Americas", country:"location unconfirmed", source:"public pull", sold:false },
       { card:"Dark Magical Curtain", set:"MAMO-EN003", serial:"006/100E", region:"Europe", country:"South Africa", source:"public pull", sold:false },
       { card:"Decode Talker Integration", set:"MAMO-EN016", serial:"077/100", region:"Americas", country:"Mexico", source:"public pull", sold:false },
       { card:"Decode Talker Integration", set:"MAMO-EN016", serial:"???/100", region:"Americas", country:"United States", source:"public pull", sold:false },
@@ -403,7 +403,7 @@
       { card:"Gagaga Magician - Gagaga Magic", set:"MAMO-EN011", serial:"032/100", region:"Americas", country:"US Northeast", source:"public listing", sold:false },
       { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"025/100E", region:"Europe", country:"Germany", source:"public pull", sold:false },
       { card:"Dark Magician, the Pharaoh's Servant", set:"MAMO-EN001", serial:"070/100E", region:"Europe", country:"Spain", source:"public pull", sold:false },
-      { card:"Stardust Dragon - Victim Sanctuary", set:"MAMO-EN007", serial:"018/100E", region:"Europe", country:"Antarctica", source:"public pull", sold:false },
+      { card:"Stardust Dragon - Victim Sanctuary", set:"MAMO-EN007", serial:"018/100E", region:"Europe", country:"location unconfirmed", source:"public pull", sold:false },
       { card:"Kuriboh - Multiply!", set:"MAMO-EN002", serial:"060/100", region:"Americas", country:"US Southeast", source:"public listing", sold:false },
       { card:"Dark Magical Curtain", set:"MAMO-EN003", serial:"011/100", region:"Americas", country:"US South", source:"public listing", sold:false },
       { card:"Dark Magical Curtain", set:"MAMO-EN003", serial:"016/100E", region:"Europe", country:"United Kingdom", source:"public listing", sold:false },
@@ -414,7 +414,7 @@
       { card:"Synchro Emergency", set:"MAMO-EN009", serial:"027/100", region:"Americas", country:"US West Coast", source:"public listing", sold:false },
       { card:"Number 39: Utopia, Emissary of Light", set:"MAMO-EN010", serial:"029/100", region:"Americas", country:"US Midwest", source:"public listing", sold:false },
       { card:"Number 39: Utopia, Emissary of Light", set:"MAMO-EN010", serial:"043/100", region:"Americas", country:"US Northeast", source:"public listing", sold:false },
-      { card:"Gagaga Magician - Gagaga Magic", set:"MAMO-EN011", serial:"096/100E", region:"Europe", country:"Australia", source:"public listing", sold:false },
+      { card:"Gagaga Magician - Gagaga Magic", set:"MAMO-EN011", serial:"096/100E", region:"Oceania", country:"Australia", source:"public listing", sold:false },
       { card:"Gagaga Girl - Cell Phone Subtraction", set:"MAMO-EN012", serial:"099/100", region:"Americas", country:"US Southeast", source:"public listing", sold:false },
       { card:"Odd-Eyes Pendulum Dragon, Four Heavenly Dragons", set:"MAMO-EN013", serial:"076/100E", region:"Europe", country:"United Kingdom", source:"public listing", sold:false },
       { card:"Horoscope Sorcerer, the Stargazer Magician", set:"MAMO-EN014", serial:"044/100E", region:"Europe", country:"United Kingdom", source:"public listing", sold:false },
@@ -426,14 +426,14 @@
       { card:"Cyberse Contract Witch", set:"MAMO-EN018", serial:"080/100", region:"Americas", country:"US Northeast", source:"public listing", sold:false },
       { card:"Cyberse Contract Witch", set:"MAMO-EN018", serial:"083/100E", region:"Europe", country:"United Kingdom", source:"public listing", sold:false },
       { card:"Decode Talker Integration", set:"MAMO-EN016", serial:"095/100", region:"Americas", country:"US South", source:"public listing", sold:false },
-      { card:"Favorite HERO Flame Wingman", set:"MAMO-EN005", serial:"???/100E", region:"Europe", country:"Australia", source:"public listing", sold:false },
+      { card:"Favorite HERO Flame Wingman", set:"MAMO-EN005", serial:"???/100E", region:"Oceania", country:"Australia", source:"public listing", sold:false },
       { card:"Odd-Eyes Pendulum Dragon, Four Heavenly Dragons", set:"MAMO-EN013", serial:"???/100", region:"Americas", country:"US Midwest", source:"public listing", sold:false },
       { card:"Decode Talker Integration", set:"MAMO-EN016", serial:"???/100", region:"Americas", country:"US Midwest", source:"public listing", sold:false },
       { card:"Cyberse Contract Witch", set:"MAMO-EN018", serial:"???/100E", region:"Europe", country:"Bulgaria", source:"public listing", sold:false }
     ];
     
     const COUNTRY_ISO = {
-      "South Africa":710, "Bulgaria":100, "Spain":724, "Australia":36, "Switzerland":756, "Antarctica":10,
+      "South Africa":710, "Bulgaria":100, "Spain":724, "Australia":36, "Switzerland":756,
       "United States":840, "Canada":124, "Mexico":484, "Brazil":76, "Argentina":32,
       "Colombia":170, "Chile":152, "Peru":604, "United Kingdom":826, "France":250,
       "Germany":276, "Italy":380, "Netherlands":528, "Japan":392
@@ -446,6 +446,7 @@
       "US Northeast": [-74.5, 41.5]
     };
     const ANTARCTICA_LL = [0, -80];
+    const AU_LL = [134, -25];
     const ISO_NAME = Object.fromEntries(Object.entries(COUNTRY_ISO).map(([k,v])=>[String(v),k]));
     const SAMPLES = [
       { id: "crowd", on: true, n: 0, k: 0, region: "US", grade: "B", overdisp: true,
@@ -754,8 +755,8 @@ a 1800/R when hits match expectation</div>
       const seen=new Set();
       let unknown=0;
       for (const s of SIGHTINGS){
-        const country=s.country||"Antarctica";
-        if (!s.country || country==="Antarctica") unknown++;
+        const country=s.country||"location unconfirmed";
+        if (!s.country || country==="location unconfirmed") unknown++;
         const dedupeKey=s.set+"|"+s.serial+"|"+s.region+"|"+country;
         if (seen.has(dedupeKey)) continue;
         seen.add(dedupeKey);
@@ -772,7 +773,7 @@ a 1800/R when hits match expectation</div>
       const unk=document.getElementById("mapUnk");
       const loc=serialsByCountry();
       unk.textContent = loc.unknown
-        ? loc.unknown+" serial"+(loc.unknown===1?"":"s")+"  |  country unknown (plotted on Antarctica)"
+        ? loc.unknown+" serial"+(loc.unknown===1?"":"s")+"  |  location unconfirmed (Antarctica pin)"
         : "All mapped serials have a country";
       if (typeof d3==="undefined" || typeof topojson==="undefined"){
         svgEl.innerHTML=`<text x="500" y="240" fill="#9a8f7c" text-anchor="middle" font-size="14">Map library failed to load</text>`;
@@ -802,8 +803,10 @@ a 1800/R when hits match expectation</div>
           });
         Object.values(loc.by).forEach(row=>{
           let xy=null;
-          if (row.country==="Antarctica") {
+          if (row.country==="location unconfirmed") {
             xy = projection(ANTARCTICA_LL);
+          } else if (row.country==="Australia") {
+            xy = projection(AU_LL);
           } else if (US_REGION_LL[row.country]) {
             xy = projection(US_REGION_LL[row.country]);
           } else {
@@ -830,12 +833,21 @@ a 1800/R when hits match expectation</div>
               .attr("stroke","#e8d090").attr("stroke-width",0.6);
           }
         }
-        if (loc.by["Antarctica"]) {
+        if (loc.by["location unconfirmed"]) {
           const aq=land.features.find(f=>String(f.id)==="10");
           if (aq) {
             svg.append("path").datum(aq).attr("d", path)
               .attr("fill","#c9a24a").attr("fill-opacity",0.25)
               .attr("stroke","#e8d090").attr("stroke-width",0.5);
+          }
+        }
+        if (loc.by["Australia"]) {
+          hitIso.add("36");
+          const au=land.features.find(f=>String(f.id)==="36");
+          if (au) {
+            svg.append("path").datum(au).attr("d", path)
+              .attr("fill","#c9a24a").attr("fill-opacity",0.35)
+              .attr("stroke","#e8d090").attr("stroke-width",0.6);
           }
         }
       };
