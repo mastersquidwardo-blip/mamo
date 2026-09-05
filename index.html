@@ -158,7 +158,7 @@
         <h2>Posterior of Americas mini-box print R  |  log-uniform prior 100k-600k</h2>
         <svg class="chart chart-lg" id="chartPost" viewBox="0 0 1000 340"></svg>
         <div class="legend">
-          <span><i class="sw" style="background:#d4b45-></i>Posterior</span>
+          <span><i class="sw" style="background:#d4b45a"></i>Posterior</span>
           <span><i class="sw" style="background:#e8e0d4;opacity:.4"></i>Prior</span>
           <span><i class="sw" style="background:#6b8fbf"></i>Median</span>
         </div>
@@ -222,10 +222,10 @@
       <div class="card">
         <h2>Box states over 90 days</h2>
         <div class="legend">
-          <span><i class="swb" style="background:#3d4a3-></i>Channel</span>
+          <span><i class="swb" style="background:#3d4a3a"></i>Channel</span>
           <span><i class="swb" style="background:#7d8a96"></i>Consumer unopened</span>
           <span><i class="swb" style="background:#6b8fbf"></i>Closet</span>
-          <span><i class="swb" style="background:#d4b45-></i>Opened</span>
+          <span><i class="swb" style="background:#d4b45a"></i>Opened</span>
           <span><i class="swb" style="background:#5c5348"></i>Physically destroyed</span>
         </div>
         <svg class="chart chart-lg" id="chartState" viewBox="0 0 1000 340"></svg>
@@ -236,7 +236,7 @@
           <table id="stateTable"></table>
         </div>
         <div class="card prose">
-          <h3>Why ashrinka is not in the rip formula</h3>
+          <h3>Why shrink is not in the rip formula</h3>
           <p>NRF 1.6% is <strong>retail sales-value loss</strong>, FY2022, last official number. A stolen Walmart box is usually opened. A crushed box is usually discounted and opened. That is untracked opening, not disappearance.</p>
           <p><strong>Physical destruction</strong> (fire, water, landfill) is the only terminal loss of units. Default <strong>0.25%</strong> of print <span class="grade gE">E</span>. Accounting shrink is tracked separately and does not shrink the GMR denominator.</p>
           <div class="formul->
@@ -298,7 +298,7 @@
         </div>
         <div class="card prose">
           <h2>Known unknowns  |  preserved from the research log</h2>
-          <p>No Konami print run, allocation, or GMR ratio. No Whatnot/LGS/Walmart rip ledger. No counted OTS census (45-page PDF only). No English TCG GMR solds - asks exist, tape does not. No pack-code decoder. aCasea on YGO Twitter is 10 or 40. OCG a6,000 boxes per namea is hearsay on a different SKU. NRF shrink is sales value, not TCG units. Clone-cohort holder counts are illustrations.</p>
+          <p>No Konami print run, allocation, or GMR ratio. No Whatnot/LGS/Walmart rip ledger. No counted OTS census (45-page PDF only). No English TCG GMR solds - asks exist, tape does not. No pack-code decoder. "Case" on YGO Twitter is 10 or 40. OCG ~6,000 boxes per name is hearsay on a different SKU. NRF shrink is sales value, not TCG units. Clone-cohort holder counts are illustrations.</p>
           <p>US TCGPlayer/Walmart evidence is not the full Americas denominator. E-suffix GMRs are a separate 1,800 and are excluded from R inference.</p>
         </div>
       </div>
@@ -306,11 +306,11 @@
         <h2>Hard facts vs observations vs model</h2>
         <table>
           <tr><th>Item</th><th>Value</th><th>Grade</th></tr>
-          <tr><td>Americas GMR count</td><td class="n">1,800 (18 A- 100)</td><td><span class="grade gA">A</span></td></tr>
+          <tr><td>Americas GMR count</td><td class="n">1,800 (18 x 100)</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>Europe-distributed GMR count</td><td class="n">1,800 (E suffix)</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>Pool A slots per mini-box</td><td class="n">3</td><td><span class="grade gA">A</span></td></tr>
           <tr><td>MSRP</td><td class="n">$34.99</td><td><span class="grade gA">A</span></td></tr>
-          <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays a 17,879</td><td><span class="grade gB">B</span></td></tr>
+          <tr><td>TCGPlayer mini-boxes sold (3mo presale)</td><td class="n">~5,629 + 1,225 displays ~ 17,879</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>USA 1P online mini-box (Walmart/Target)</td><td class="n">OOS at MSRP (~$35) as of 5 Sep</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>TCGPlayer box market ~3-4 Sep</td><td class="n">$32-41 (June high ~$123)</td><td><span class="grade gB">B</span></td></tr>
           <tr><td>Public GMR serials</td><td class="n">Americas 010/032/049x2/052/060/077x2; Europe 044+006+censored /100E</td><td><span class="grade gB">B</span></td></tr>
@@ -610,8 +610,8 @@
         </div>
         <div>
           <div class="bar" style="height:22px;margin-bottom:8px">
-            <i style="width:${pct(sn.O/sn.R)};background:#d4b45-></i>
-            <i style="width:${pct(sn.C/sn.R)};background:#3d4a3-></i>
+            <i style="width:${pct(sn.O/sn.R)};background:#d4b45a"></i>
+            <i style="width:${pct(sn.C/sn.R)};background:#3d4a3a"></i>
             <i style="width:${pct(sn.U/sn.R)};background:#7d8a96"></i>
             <i style="width:${pct(sn.L/sn.R)};background:#6b8fbf"></i>
             <i style="width:${pct(sn.D/sn.R)};background:#5c5348"></i>
@@ -676,8 +676,8 @@ a 1800/R when hits match expectation</div>
       };
       svg.innerHTML=grid+
         `<rect x="${bandX0}" y="${padT}" width="${bandX1-bandX0}" height="${H}" fill="#6b8fbf" opacity=".08"/>`+
-        area(pw,"#e8e0d4",.08)+area(post.w,"#d4b45-,.25)+
-        `<path d="${path(xs,post.w,x0,y0,W,H,yMax)}" fill="none" stroke="#d4b45- stroke-width="2"/>`+
+        area(pw,"#e8e0d4",.08)+area(post.w,"#d4b45a",.25)+
+        `<path d="${path(xs,post.w,x0,y0,W,H,yMax)}" fill="none" stroke="#d4b45a" stroke-width="2"/>`+
         `<line x1="${medX}" x2="${medX}" y1="${padT}" y2="${y0}" stroke="#6b8fbf" stroke-dasharray="4 3"/>`;
       const n=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.n,0);
       const k=SAMPLES.filter(s=>s.on).reduce((a,s)=>a+s.k,0);
@@ -744,13 +744,13 @@ a 1800/R when hits match expectation</div>
         const path=d3.geoPath(projection);
         const svg=d3.select(svgEl);
         svg.selectAll("*").remove();
-        svg.append("path").datum({type:"Sphere"}).attr("d", path).attr("fill","#0e0c0-).attr("stroke","#2a241c");
+        svg.append("path").datum({type:"Sphere"}).attr("d", path).attr("fill","#0e0c0a").attr("stroke","#2a241c");
         svg.selectAll("path.land")
           .data(land.features)
           .join("path")
           .attr("class", d=> hitIso.has(String(d.id)) ? "land hit" : "land")
           .attr("d", path)
-          .attr("fill", d=> hitIso.has(String(d.id)) ? "#c9a24- : "#1c1814")
+          .attr("fill", d=> hitIso.has(String(d.id)) ? "#c9a24a" : "#1c1814")
           .attr("stroke", d=> hitIso.has(String(d.id)) ? "#e8d090" : "#2a241c")
           .attr("stroke-width", 0.5)
           .append("title")
@@ -766,7 +766,7 @@ a 1800/R when hits match expectation</div>
           if (!feat) return;
           const [x,y]=projection(d3.geoCentroid(feat));
           svg.append("circle").attr("cx",x).attr("cy",y).attr("r", 6+2*row.n)
-            .attr("fill","#d4b45-).attr("stroke","#0b0a09").attr("stroke-width",1.2);
+            .attr("fill","#d4b45a").attr("stroke","#0b0a09").attr("stroke-width",1.2);
           svg.append("text").attr("x",x+10).attr("y",y+4)
             .attr("fill","#e8e0d4").attr("font-size",11).attr("font-family","IBM Plex Mono")
             .text(row.country+"  |  "+row.n);
@@ -850,7 +850,7 @@ a 1800/R when hits match expectation</div>
         grid+=`<line x1="${x}" x2="${x}" y1="${padT}" y2="${y0}" stroke="#2a241c"/><text x="${x}" y="${y0+16}" fill="#6e6558" font-size="10" font-family="IBM Plex Mono" text-anchor="middle">${t===0?"OTS":"d"+t}</text>`;
       });
       const tx=x0+(state.day/HORIZON)*W;
-      svg.innerHTML=grid+stack(["D","O","L","U","C"],["#5c5348","#d4b45-,"#6b8fbf","#7d8a96","#3d4a3-])+
+      svg.innerHTML=grid+stack(["D","O","L","U","C"],["#5c5348","#d4b45a","#6b8fbf","#7d8a96","#3d4a3a"])+
         `<line x1="${tx}" x2="${tx}" y1="${padT}" y2="${y0}" stroke="#e8e0d4" stroke-dasharray="3 4" opacity=".5"/>`;
     }
 
@@ -879,10 +879,10 @@ a 1800/R when hits match expectation</div>
         grid+=`<line x1="${x}" x2="${x}" y1="${padT}" y2="${y0}" stroke="#2a241c"/><text x="${x}" y="${y0+16}" fill="#6e6558" font-size="10" font-family="IBM Plex Mono" text-anchor="middle">d${t}</text>`;
       });
       svg.innerHTML=grid+
-        `<path d="${pD}" fill="none" stroke="#d4b45- stroke-width="2.2"/>`+
-        `<path d="${pC}" fill="none" stroke="#c45c3- stroke-width="1.6" stroke-dasharray="5 3"/>`+
-        `<text x="${x0+8}" y="${padT+12}" fill="#d4b45- font-size="11" font-family="IBM Plex Mono">density (solid)</text>`+
-        `<text x="${x0+8}" y="${padT+26}" fill="#c45c3- font-size="11" font-family="IBM Plex Mono">remaining count (dash)</text>`;
+        `<path d="${pD}" fill="none" stroke="#d4b45a" stroke-width="2.2"/>`+
+        `<path d="${pC}" fill="none" stroke="#c45c3a" stroke-width="1.6" stroke-dasharray="5 3"/>`+
+        `<text x="${x0+8}" y="${padT+12}" fill="#d4b45a" font-size="11" font-family="IBM Plex Mono">density (solid)</text>`+
+        `<text x="${x0+8}" y="${padT+26}" fill="#c45c3a" font-size="11" font-family="IBM Plex Mono">remaining count (dash)</text>`;
     }
 
     function renderStateTable(sn){
