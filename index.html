@@ -393,7 +393,7 @@
       { card:"Dark Magical Curtain", set:"MAMO-EN002", serial:"006/100E", region:"Europe", country:"South Africa", source:"public pull", sold:false }
     ];
     
-    const COUNTRY_ISO = {
+    const COUNTRY_ISO = { "South Africa":710,
       "United States":840, "Canada":124, "Mexico":484, "Brazil":76, "Argentina":32,
       "Colombia":170, "Chile":152, "Peru":604, "United Kingdom":826, "France":250,
       "Germany":276, "Spain":724, "Italy":380, "Netherlands":528, "Australia":36, "Japan":392
@@ -483,7 +483,7 @@
     function syncCrowdSample(){
       const c=crowdStats();
       const s=SAMPLES.find(x=>x.id==="crowd");
-      if (s){ s.n=c.nBox; s.k=c.gmr; s.note=`Crowdsource 4 Sep: ${c.nBox} boxes, ${c.gmr} GMR, ${c.ofH} OF / ${c.ofB.toFixed(1)} boxes, ${c.slH} SL / ${c.slB.toFixed(1)} boxes.`; }
+      if (s){ s.n=c.nBox; s.k=c.gmr; s.note=`Crowdsource 4–5 Sep: ${c.nBox} boxes, ${c.gmr} GMR, ${c.ofH} OF / ${c.ofB.toFixed(1)} boxes, ${c.slH} SL / ${c.slB.toFixed(1)} boxes.`; }
       return c;
     }
 
