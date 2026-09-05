@@ -67,3 +67,23 @@ OF/SL in **North America crowd samples** may still appear as ancillary stats on 
 
 - Shipped: overview, print inference, depletion, crowd log, chase, evidence; Sep 4 crowd rips + serial 052/100.
 - Local uncommitted: country-only anonymization + D3/topojson GMR country map (baseline for privacy rule #1).
+
+## 7. Print-run estimation via online retail (USA)
+
+Tentative channel model (operator hypothesis — refine with data):
+
+| Channel | Share of print | Notes |
+| --- | --- | --- |
+| Retail total | 50% | Big-box + mass ecommerce |
+| — online | 40% of retail (= 20% of print) | First-party web storefronts |
+| — physical stores | 60% of retail (= 30% of print) | In-store shelves |
+| LGS total | 50% | Local game stores / OTS |
+| — LGS online | part of LGS | Shop sites, some marketplace |
+| — LGS in-person | rest of LGS | |
+
+### Data camps
+- **Camp A — 1P online (USA):** Walmart, Target, Amazon sold-by-retailer only. Track mini-boxes and displays (10 mini-boxes) / cases (12) separately.
+- **Camp B — 3P online (USA):** 3P sellers on WM/Target/Amazon + eBay + TCGPlayer.
+
+Use Camp A to bound DC/online retail sell-through; Camp B for broader online liquidity. Do not treat listing counts as print run directly — invert through the allocation shares above.
+
