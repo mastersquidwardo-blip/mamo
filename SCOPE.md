@@ -82,7 +82,7 @@ Tentative channel model (operator hypothesis - refine with data):
 | - LGS in-person | rest of LGS | |
 
 ### Data camps
-- **Camp A - 1P online (USA):** Walmart, Target, Amazon sold-by-retailer only. Track mini-boxes and displays (10 mini-boxes) / cases (12) separately.
+- **Camp A - 1P online (USA):** Walmart, Target, Amazon sold-by-retailer only. Track mini-boxes and displays (10 mini-boxes) / cases (4 displays = 40 mini-boxes) separately.
 - **Camp B - 3P online (USA):** 3P sellers on WM/Target/Amazon + eBay + TCGPlayer.
 
 Use Camp A to bound DC/online retail sell-through; Camp B for broader online liquidity. Do not treat listing counts as print run directly - invert through the allocation shares above.
