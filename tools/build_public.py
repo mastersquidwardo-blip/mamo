@@ -33,8 +33,13 @@ def project(ledger,openings):
         if not e.get('active',True): continue
         c=e.get('country') or 'Unknown'
         if c!='Unknown' and c not in COUNTRIES: raise ValueError('Invalid opening country')
-        p={k:e.get(k) for k in ('boxes','packs','cases','pool','reason','reviewed','selected_outcome','origin')+FIELDS}
+        p={k:e.get(k) for k in ('boxes','packs','cases','pool','reason','reviewed','selected_outcome','origin','collection')+FIELDS}
         p.update(id='O'+str(i+1).zfill(3),country=c)
+        original=e.get('original')
+        if original:
+            p['prior']={k:original.get(k) for k in ('boxes','packs','gmr','of','sl','pool')}
+        else:
+            p['prior']=None
         for f in FIELDS:
             if p[f] is not None and (not isinstance(p[f],int) or p[f]<0): raise ValueError('Invalid hit count')
         if p['packs'] is not None and (not isinstance(p['packs'],int) or p['packs']<1): raise ValueError('Invalid pack exposure')

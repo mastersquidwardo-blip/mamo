@@ -29,21 +29,34 @@ function renderSerials(){const q=$('search').value.toLowerCase().trim(),pool=$('
  $('resultCount').textContent=rows.length+' of '+data.serials.length+' reported identities shown';$('noResults').hidden=rows.length>0;
 }
 function renderRates(){
- const pool=$('ratePool').value,winners=$('includeWinners').checked,omit=$('omitLargest').checked;
- const keys=pool==='Americas'?stats.metrics:['gmr'];
- $('rateCards').innerHTML=keys.map(metric=>{let rows=data.openings;
- // Ancillary rates respect the North America scope; GMR uses the whole Americas pool.
- if(metric!=='gmr')rows=rows.filter(r=>['United States','Canada','Mexico'].includes(r.country));
- const a=stats.summarize(rows,pool,metric,winners,omit),ci=stats.interval(a.hits,a.boxes);
- return '<article class="rate-card"><h3>'+metricLabels[metric]+'</h3><div class="big">'+(a.packs?a.hits+' in '+fmt(a.boxes)+' boxes':'No usable reports')+'</div><p class="fine">'+a.reports+' reports · '+fmt(a.packs,0)+' packs</p>'+(a.packs?'<p class="fine">'+fmt(a.per100,2)+' cards per 100 boxes<br>95% counting interval: '+fmt(ci[0],2)+'–'+fmt(ci[1],2)+' per 100</p><p class="fine">'+(a.hits?'Observed average: '+fmt(a.boxesPerHit,1)+' boxes per card.':'Zero hits does not mean the rate is zero.')+'</p><p class="fine">Largest report: '+fmt(a.largestShare*100,1)+'% of this exposure.</p>':'')+'</article>';}).join('');
- const scenarios=[['Reviewed reports; successful pulls excluded',false,false],['Including successful-pull posts',true,false],['Including successes; largest report removed',true,true]];
- $('sensitivity').innerHTML='<div class="table-wrap"><table><caption class="sr-only">GMR sample sensitivity</caption><thead><tr><th>Selection</th><th>Reports</th><th>Boxes</th><th>GMRs</th><th>Boxes per GMR</th></tr></thead><tbody>'+scenarios.map(([label,w,o])=>{const a=stats.summarize(data.openings,pool,'gmr',w,o);return '<tr><td>'+label+'</td><td>'+a.reports+'</td><td>'+fmt(a.boxes)+'</td><td>'+a.hits+'</td><td>'+(a.boxesPerHit?fmt(a.boxesPerHit):'No hits observed')+'</td></tr>';}).join('')+'</tbody></table></div>';
+ const pool=$('ratePool').value;
+ const featured=[['O025','Large case opening'],['O029','E-distributed box opening'],['O018','Americas box opening']];
+ $('gmrEvidence').innerHTML=featured.map(([id,label])=>{
+  const r=data.openings.find(e=>e.id===id);if(!r)return '';
+  const units=r.cases?fmt(r.cases)+' cases':fmt(r.packs/3)+' mini-boxes';
+  return '<article class="rate-card"><h3>'+label+'</h3><div class="big">'+r.gmr+' GMR'+(r.gmr===1?'':'s')+' / '+units+'</div><p class="fine">'+(r.pool==='Unknown'?'Distribution unconfirmed':esc(r.pool))+' · '+(r.country==='Unknown'?'Country unconfirmed':esc(r.country))+'</p><p class="fine">'+(r.cases?'Case size is unresolved. The report remains visible in its original units.':'One opening report, not a general pull-rate estimate.')+'</p></article>';
+ }).join('');
+ const keys=pool==='Americas'?stats.metrics.filter(k=>k!=='gmr'):[];
+ $('rateCards').innerHTML=keys.map(metric=>{
+ const rows=data.openings.filter(r=>['United States','Canada','Mexico'].includes(r.country));
+ const a=stats.summarize(rows,pool,metric);
+ return '<article class="rate-card"><h3>'+metricLabels[metric]+'</h3><div class="big">'+(a.packs?a.hits+' recorded / '+fmt(a.boxes)+' boxes':'No reviewed totals')+'</div><p class="fine">'+a.reports+' reports · '+fmt(a.packs,0)+' packs. Descriptive counts only.</p><p class="fine">Only reports stating this rarity enter its total; other results remain unknown.</p></article>';
+ }).join('') || '<p class="fine">International non-GMR observations are listed individually below. They are not pooled into North American totals.</p>';
+ $('coverageNote').textContent=data.openings.length+' opening records retained, including '+data.openings.filter(r=>r.prior).length+' with preserved earlier values. Missing verification does not erase the earlier report; it changes its evidence label.';
 }
-function renderOpenings(){const hit=n=>n===null||n===undefined?'—':n;
- $('openingRows').innerHTML=data.openings.map(r=>'<tr><td>'+r.id+'<small>'+esc(r.country)+'</small></td><td>'+esc(r.pool)+'<small>'+(r.packs?fmt(r.packs/3)+' boxes / '+r.packs+' packs':(r.cases?r.cases+' cases; size unknown':'Exposure unknown'))+'</small></td>'+['gmr','ur_of','sl_of','main_sl','bonus_sl','unclassified_sl'].map(k=>'<td>'+hit(r[k])+'</td>').join('')+'<td><span class="badge '+(r.reviewed?'checked':'')+'">'+(r.reviewed?'Reviewed':'Needs source review')+'</span><small>'+esc(r.reason)+'</small></td></tr>').join('');}
-function renderScenario(){try{const result=stats.scenario(Number($('run').value),Number($('opened').value),Number($('destroyed').value));
+function renderOpenings(){
+ const hit=n=>n===null||n===undefined?'—':n;
+ $('openingRows').innerHTML=[...data.openings].sort((a,b)=>(b.cases?100000:0)+(b.packs||0)-(a.cases?100000:0)-(a.packs||0)).map(r=>{
+  const prior=r.prior;
+  const prev=prior?'<details><summary>Earlier recorded values</summary><p class="fine">'+fmt(prior.boxes)+' boxes / '+fmt(prior.packs,0)+' packs; GMR '+hit(prior.gmr)+'; overframe '+hit(prior.of)+'; unsplit Starlight '+hit(prior.sl)+'. Prior pool label: '+esc(prior.pool)+'. These are the prior snapshot, including any unverified conversion or assumed zero; they do not establish odds.</p></details>':'';
+  const shown=(key,oldKey)=>r[key]!==null&&r[key]!==undefined?hit(r[key]):(!r.reviewed&&prior&&oldKey&&prior[oldKey]!==null&&prior[oldKey]!==undefined?hit(prior[oldKey])+'<small>prior record</small>':'—');
+  const values=[['gmr','gmr'],['ur_of','of'],['sl_of',null],['main_sl',null],['bonus_sl',null],['unclassified_sl','sl']];
+  return '<tr><td>'+r.id+'<small>'+esc(r.country)+'</small></td><td>'+esc(r.pool)+'<small>'+(r.cases?r.cases+' cases; size unknown':r.packs?fmt(r.packs/3)+' boxes / '+r.packs+' packs':'Exposure unknown')+'</small></td>'+values.map(([k,old])=>'<td>'+shown(k,old)+'</td>').join('')+'<td><span class="badge '+(r.reviewed?'checked':'')+'">'+(r.reviewed?'Source checked':'Prior record · review pending')+'</span><small>'+esc(r.reason)+'</small>'+prev+'</td></tr>';
+ }).join('');
+}
+function renderScenario(){if(!$('run').value.trim()){$('scenarioResult').innerHTML='<p class="fine">Enter your own print-run assumption to calculate a scenario. No print run or pull odds have been estimated from the current evidence.</p>';return;}try{const result=stats.scenario(Number($('run').value),Number($('opened').value),Number($('destroyed').value));
  const rows=[['Expected sealed boxes',result.sealedBoxes],['Expected GMRs still sealed',result.sealedCards],['Expected GMRs already pulled',result.pulledCards],['Expected GMRs destroyed unopened',result.destroyedCards]];
- $('scenarioResult').innerHTML='<div class="supply-bar" aria-hidden="true"><span style="width:'+Number($('opened').value)+'%"></span><span style="width:'+Number($('destroyed').value)+'%"></span><span style="width:'+(100-Number($('opened').value)-Number($('destroyed').value))+'%"></span></div>'+rows.map(([label,n])=>'<div class="scenario-row"><span>'+label+'</span><strong>'+fmt(n)+'</strong></div>').join('')+'<p class="fine">'+(result.boxesPerHit?'Expected density: one GMR per '+fmt(result.boxesPerHit)+' surviving boxes on average. Same density as before random opening or destruction.':'No sealed boxes remain in this scenario.')+'</p>';
+ $('scenarioResult').innerHTML='<div class="supply-bar" aria-hidden="true"><span style="width:'+Number($('opened').value)+'%"></span><span style="width:'+Number($('destroyed').value)+'%"></span><span style="width:'+(100-Number($('opened').value)-Number($('destroyed').value))+'%"></span></div>'+rows.map(([label,n])=>'<div class="scenario-row"><span>'+label+'</span><strong>'+fmt(n)+'</strong></div>').join('')+'<p class="fine">'+(result.boxesPerHit?'Hypothetical density from your print-run input: one GMR per '+fmt(result.boxesPerHit)+' surviving boxes on average. Same density as before random opening or destruction.':'No sealed boxes remain in this scenario.')+'</p>';
  }catch(e){$('scenarioResult').innerHTML='<p class="error">'+esc(e.message)+'</p>';}}
-['search','pool','evidence','sort'].forEach(id=>$(id).addEventListener('input',renderSerials));['ratePool','includeWinners','omitLargest'].forEach(id=>$(id).addEventListener('change',renderRates));['run','opened','destroyed'].forEach(id=>$(id).addEventListener('input',renderScenario));$('scenarioForm').addEventListener('submit',e=>e.preventDefault());
+['search','pool','evidence','sort'].forEach(id=>$(id).addEventListener('input',renderSerials));['ratePool'].forEach(id=>$(id).addEventListener('change',renderRates));['run','opened','destroyed'].forEach(id=>$(id).addEventListener('input',renderScenario));$('scenarioForm').addEventListener('submit',e=>e.preventDefault());
 renderOverview();renderSerials();renderRates();renderOpenings();renderScenario();route();

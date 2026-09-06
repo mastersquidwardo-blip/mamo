@@ -95,3 +95,7 @@ Use Camp A to bound DC/online retail sell-through; Camp B for broader online liq
 ## September 6, 2026 data review
 
 This review supersedes earlier default likelihood and geographic behavior. The public dashboard now uses the private serial-ledger.json and opening-ledger.json through tools/build_public.py. Never silently reuse assumed zero counts, unknown distribution, inferred case sizes or successful-pull samples as representative population data. No defensible print-run estimate is currently established. Print-run and destruction controls are illustrative assumptions only. The E-distributed pool includes Oceania, Africa and the Middle East; unknown country stays off the map. All public output is country-only, including old maintenance scripts.
+
+### Pull-rate presentation correction
+
+Preserve the earlier recorded opening fields as labeled provisional evidence; do not erase them when review is incomplete. Never classify a reply as unsuitable solely because it reported a GMR. The current mixed-source registry cannot support a GMR odds estimate or confidence interval. Keep bulk reports visible in their original units when a conversion is unresolved. No default print-run value should look like an inferred estimate.

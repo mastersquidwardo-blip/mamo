@@ -23,3 +23,7 @@ Serve this directory on localhost with python -m http.server 8767 --bind 127.0.0
 The map outline is bundled locally in world-paths.js; see THIRD_PARTY_NOTICES.txt. No remote scripts, analytics or collector image requests run in the dashboard.
 
 The September 6 review replaces unsupported default print-run inference with a labeled assumption explorer. Earlier implementations remain in Git history (baseline 41198f7). Public reports do not establish a complete worldwide pull count, population odds, remaining sealed supply, ownership or completed sale prices.
+
+## Pull-rate correction
+
+The mixed-source GMR ledger does not establish population odds. The dashboard no longer publishes GMR inverse averages, confidence intervals or a remove-largest-report toggle. Original opening values are preserved under a provisional prior field, while reviewed fields remain separate. Source acquisition is classified independently of outcome: positive and zero-hit replies to the same crowd request follow the same rule. The 100-case / 1-GMR report remains prominent in case units until conversion is verified. The scenario print-run input is blank until a user supplies an assumption.

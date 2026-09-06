@@ -580,6 +580,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -587,7 +588,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O001",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 8,
+        "packs": 24,
+        "gmr": 0,
+        "of": null,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 6,
@@ -598,6 +607,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -605,7 +615,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O002",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 6,
+        "packs": 18,
+        "gmr": 0,
+        "of": 0,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 10,
@@ -616,6 +634,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -623,7 +642,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O003",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 10,
+        "packs": 30,
+        "gmr": 0,
+        "of": 1,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 12,
@@ -634,6 +661,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": 1,
       "sl_of": null,
@@ -641,7 +669,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": 2,
       "id": "O004",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 4,
+        "packs": 12,
+        "gmr": 0,
+        "of": 0,
+        "sl": 1,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 21,
@@ -652,6 +688,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -659,7 +696,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O005",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 21,
+        "packs": 63,
+        "gmr": 0,
+        "of": 1,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 4,
@@ -670,6 +715,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -677,7 +723,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O006",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 4,
+        "packs": 12,
+        "gmr": 0,
+        "of": 1,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 1.3333333333333333,
@@ -688,6 +742,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -695,7 +750,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O007",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 1.3333333333333333,
+        "packs": 4,
+        "gmr": 0,
+        "of": 0,
+        "sl": 1,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 6,
@@ -706,6 +769,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": 0,
       "sl_of": 0,
@@ -713,7 +777,15 @@ window.MAMO_DATA = {
       "bonus_sl": 0,
       "unclassified_sl": null,
       "id": "O008",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 6,
+        "packs": 18,
+        "gmr": 0,
+        "of": 0,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 1,
@@ -724,6 +796,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -731,7 +804,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O009",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 1,
+        "packs": 3,
+        "gmr": 0,
+        "of": 0,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 2,
@@ -742,6 +823,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -749,7 +831,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O010",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 2,
+        "packs": 6,
+        "gmr": 0,
+        "of": 0,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 10,
@@ -760,6 +850,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -767,7 +858,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O011",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 10,
+        "packs": 30,
+        "gmr": 0,
+        "of": 1,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 12,
@@ -778,6 +877,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -785,17 +885,26 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O012",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 12,
+        "packs": 36,
+        "gmr": 0,
+        "of": 0,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 1,
       "packs": 3,
       "cases": null,
       "pool": "Americas",
-      "reason": "First-hand one-box GMR report. Selected because of a successful pull; other hits incomplete.",
+      "reason": "First-hand one-box GMR report. other hits incomplete. Positive response to the same crowd request as zero-hit replies; do not exclude solely because a GMR was pulled.",
       "reviewed": true,
-      "selected_outcome": true,
+      "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": 1,
       "ur_of": null,
       "sl_of": 0,
@@ -803,7 +912,15 @@ window.MAMO_DATA = {
       "bonus_sl": 0,
       "unclassified_sl": null,
       "id": "O013",
-      "country": "Mexico"
+      "country": "Mexico",
+      "prior": {
+        "boxes": 1,
+        "packs": 3,
+        "gmr": 1,
+        "of": null,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 50,
@@ -814,6 +931,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -821,7 +939,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O014",
-      "country": "Canada"
+      "country": "Canada",
+      "prior": {
+        "boxes": 50,
+        "packs": 150,
+        "gmr": 0,
+        "of": 2,
+        "sl": 7,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 15,
@@ -832,6 +958,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -839,7 +966,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O015",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 15,
+        "packs": 45,
+        "gmr": 0,
+        "of": 2,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 2,
@@ -850,6 +985,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -857,7 +993,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O016",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 2,
+        "packs": 6,
+        "gmr": 0,
+        "of": null,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 10,
@@ -868,6 +1012,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -875,7 +1020,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O017",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 10,
+        "packs": 30,
+        "gmr": 0,
+        "of": 0,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 90,
@@ -886,6 +1039,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": false,
       "origin": "Reddit",
+      "collection": "individual_post",
       "gmr": 0,
       "ur_of": null,
       "sl_of": 0,
@@ -893,7 +1047,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O018",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 90,
+        "packs": 270,
+        "gmr": 0,
+        "of": null,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 3,
@@ -904,6 +1066,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -911,7 +1074,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O019",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 3,
+        "packs": 9,
+        "gmr": 0,
+        "of": null,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 4,
@@ -922,6 +1093,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": true,
       "origin": "Reddit",
+      "collection": "individual_post",
       "gmr": 1,
       "ur_of": null,
       "sl_of": null,
@@ -929,7 +1101,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O020",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 4,
+        "packs": 12,
+        "gmr": 1,
+        "of": null,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 20,
@@ -940,6 +1120,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "Imported",
+      "collection": "legacy",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -947,7 +1128,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O021",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 20,
+        "packs": 60,
+        "gmr": 1,
+        "of": null,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 13,
@@ -958,6 +1147,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -965,7 +1155,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O022",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 13,
+        "packs": 39,
+        "gmr": 0,
+        "of": null,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 2,
@@ -976,6 +1174,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -983,7 +1182,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": 1,
       "id": "O023",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 2,
+        "packs": 6,
+        "gmr": 0,
+        "of": null,
+        "sl": 1,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 10,
@@ -994,6 +1201,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": 0,
       "ur_of": 0,
       "sl_of": 0,
@@ -1001,17 +1209,26 @@ window.MAMO_DATA = {
       "bonus_sl": 0,
       "unclassified_sl": null,
       "id": "O024",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 10,
+        "packs": 30,
+        "gmr": 0,
+        "of": 0,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": null,
       "packs": null,
       "cases": 100,
       "pool": "Unknown",
-      "reason": "100 cases stated; case size and distribution unknown. Do not convert to 4,000 boxes. Approximate 1.2 overframes and 1.2 Starlights per case are not exact hit counts.",
+      "reason": "Source rechecked: 100 cases opened, 1 GMR and 13 Starlight overframes. Case size and distribution not established. Retained in original case units; never silently discarded from the evidence summary.",
       "reviewed": true,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "case_report",
       "gmr": 1,
       "ur_of": null,
       "sl_of": 13,
@@ -1019,17 +1236,26 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O025",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 4000,
+        "packs": 12000,
+        "gmr": 1,
+        "of": 120,
+        "sl": 120,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 1,
       "packs": 3,
       "cases": null,
       "pool": "Americas",
-      "reason": "One-box report plus prior local OCR record of Curtain 022/100. Fresh OCR was deferred for low system memory.",
+      "reason": "One-box report plus prior local OCR record of Curtain 022/100.  Positive response to the same crowd request as zero-hit replies; do not exclude solely because a GMR was pulled.",
       "reviewed": true,
-      "selected_outcome": true,
+      "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": 1,
       "ur_of": null,
       "sl_of": null,
@@ -1037,7 +1263,15 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O026",
-      "country": "United States"
+      "country": "United States",
+      "prior": {
+        "boxes": 1,
+        "packs": 3,
+        "gmr": 1,
+        "of": null,
+        "sl": null,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 20,
@@ -1048,6 +1282,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": 1,
       "sl_of": null,
@@ -1055,7 +1290,15 @@ window.MAMO_DATA = {
       "bonus_sl": 2,
       "unclassified_sl": null,
       "id": "O027",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 20,
+        "packs": 60,
+        "gmr": 0,
+        "of": 1,
+        "sl": 0,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": null,
@@ -1066,6 +1309,7 @@ window.MAMO_DATA = {
       "reviewed": false,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -1073,17 +1317,26 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O028",
-      "country": "Unknown"
+      "country": "Unknown",
+      "prior": {
+        "boxes": 80,
+        "packs": 240,
+        "gmr": 0,
+        "of": 3,
+        "sl": 2,
+        "pool": "Americas"
+      }
     },
     {
       "boxes": 120,
       "packs": 360,
       "cases": null,
       "pool": "E-distributed",
-      "reason": "10 cases, explicitly 12 boxes each. Author clarification splits 10 non-overframe Starlights into six main-pack and four bonus-pack hits. E-pool GMR only in pooled rates.",
+      "reason": "10 cases, explicitly 12 boxes each. Author clarification splits 10 non-overframe Starlights into six main-pack and four bonus-pack hits. Counts retained as an individual E-distributed opening report.",
       "reviewed": true,
       "selected_outcome": false,
       "origin": "Reddit",
+      "collection": "individual_post",
       "gmr": 0,
       "ur_of": 10,
       "sl_of": 2,
@@ -1091,17 +1344,19 @@ window.MAMO_DATA = {
       "bonus_sl": 4,
       "unclassified_sl": null,
       "id": "O029",
-      "country": "Australia"
+      "country": "Australia",
+      "prior": null
     },
     {
       "boxes": 2,
       "packs": 6,
       "cases": null,
       "pool": "E-distributed",
-      "reason": "First-hand six-pack GMR post. Successful-pull selection; serial still unread.",
+      "reason": "First-hand six-pack GMR post. Showcase source; serial still unread.",
       "reviewed": true,
       "selected_outcome": true,
       "origin": "Reddit",
+      "collection": "individual_post",
       "gmr": 1,
       "ur_of": 1,
       "sl_of": null,
@@ -1109,7 +1364,8 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O030",
-      "country": "Germany"
+      "country": "Germany",
+      "prior": null
     },
     {
       "boxes": 2,
@@ -1120,6 +1376,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": true,
       "origin": "Reddit",
+      "collection": "individual_post",
       "gmr": 1,
       "ur_of": null,
       "sl_of": null,
@@ -1127,7 +1384,8 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O031",
-      "country": "Bulgaria"
+      "country": "Bulgaria",
+      "prior": null
     },
     {
       "boxes": 4,
@@ -1138,6 +1396,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -1145,7 +1404,8 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O032",
-      "country": "United States"
+      "country": "United States",
+      "prior": null
     },
     {
       "boxes": 2,
@@ -1156,6 +1416,7 @@ window.MAMO_DATA = {
       "reviewed": true,
       "selected_outcome": false,
       "origin": "X",
+      "collection": "crowd_thread",
       "gmr": null,
       "ur_of": null,
       "sl_of": null,
@@ -1163,7 +1424,8 @@ window.MAMO_DATA = {
       "bonus_sl": null,
       "unclassified_sl": null,
       "id": "O033",
-      "country": "United States"
+      "country": "United States",
+      "prior": null
     }
   ]
 };
