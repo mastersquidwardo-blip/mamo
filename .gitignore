@@ -1,5 +1,11 @@
 
-# Raw identifiers / working notes — never publish
+# Raw identifiers / working notes â€” never publish
 _private/
 SCOPE.md.bak
 
+
+# Generated Python cache and local environments
+__pycache__/
+*.pyc
+.venv/
+node_modules/

@@ -92,3 +92,6 @@ Use Camp A to bound DC/online retail sell-through; Camp B for broader online liq
 - Path: `_private/serial-ledger.json` (gitignored). Source of truth for all pulled/listed serialized GMRs, including unknown serial digits.
 - May store handles, URLs, and private place codes for research. Never publish those fields.
 - Public `SIGHTINGS` in `index.html` is a privacy-scrubbed projection only.
+## September 6, 2026 data review
+
+This review supersedes earlier default likelihood and geographic behavior. The public dashboard now uses the private serial-ledger.json and opening-ledger.json through tools/build_public.py. Never silently reuse assumed zero counts, unknown distribution, inferred case sizes or successful-pull samples as representative population data. No defensible print-run estimate is currently established. Print-run and destruction controls are illustrative assumptions only. The E-distributed pool includes Oceania, Africa and the Middle East; unknown country stays off the map. All public output is country-only, including old maintenance scripts.
